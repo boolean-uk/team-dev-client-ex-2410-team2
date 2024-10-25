@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Stepper from '../../components/stepper';
 import useAuth from '../../hooks/useAuth';
-import StepOne from './stepOne';
-import StepTwo from './stepTwo';
-import './style.css';
+import StepOne from './stepOne/StepOne';
+import StepTwo from './stepTwo/StepTwo';
+import './welcome.css';
 
 const Welcome = () => {
   const { onCreateProfile } = useAuth();
