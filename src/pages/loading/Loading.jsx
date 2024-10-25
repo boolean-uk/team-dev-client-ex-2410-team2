@@ -1,7 +1,7 @@
 import FullLogo from '../../assets/fullLogo-whiteLines';
 import './loading.css';
 
-const Dashboard = () => {
+const Loading = () => {
   return (
     <div className="bg-green loadingscreen">
       <div className="">
@@ -14,4 +14,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Loading;
