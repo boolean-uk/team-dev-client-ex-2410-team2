@@ -25,17 +25,25 @@ const AuthProvider = ({ children }) => {
     }
   }, [location.state?.from?.pathname, navigate]);
 
-  const handleLogin = async (email, password) => {
-    const res = await login(email, password);
+  const handleLogin = async (email, password, rememberMe) => {
+    try {
+      const res = await login(email, password);
 
-    if (!res.data.token) {
-      return navigate('/login');
+      if (!res.data.token) {
+        throw new Error('Invalid credentials, please try again.');
+      }
+
+      localStorage.setItem('token', res.data.token);
+      setToken(res.token);
+
+      if (rememberMe) {
+        // TODO: Implement remember me functionality, extend token expiration.
+      }
+
+      navigate(location.state?.from?.pathname || '/');
+    } catch (error) {
+      return error.message;
     }
-
-    localStorage.setItem('token', res.data.token);
-
-    setToken(res.token);
-    navigate(location.state?.from?.pathname || '/');
   };
 
   const handleLogout = () => {
@@ -56,10 +64,18 @@ const AuthProvider = ({ children }) => {
     navigate('/verification');
   };
 
-  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+  const handleCreateProfile = async (
+    firstName,
+    lastName,
+    githubUrl,
+    bio,
+    email,
+    mobile,
+    password
+  ) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, githubUrl, bio);
+    await createProfile(userId, firstName, lastName, githubUrl, bio, email, mobile, password);
 
     localStorage.setItem('token', token);
     navigate('/');

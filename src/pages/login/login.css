@@ -1,9 +1,89 @@
 .login-form {
   margin-bottom: 32px;
 }
+
 .login-form form {
   display: grid;
   grid-template-rows: repeat(2, auto);
   gap: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+}
+
+.remember-forgot-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Remove default checkbox. */
+#remember-me {
+  display: none;
+}
+
+/* Create custom checkbox. */
+.remember-me label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  color: #00004673;
+  transition: color 0.2s ease-in-out;
+}
+
+.remember-me label:hover {
+  color: #000046;
+}
+
+.remember-me label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+}
+
+#remember-me:checked + label::before {
+  background-color: #64648C;
+  border-color: #64648C;
+}
+
+#remember-me:checked + label:after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 40%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+}
+
+.forgot-password {
+  text-decoration: none;
+  color: #00004673;
+  transition: color 0.2s ease-in-out;
+
+}
+
+.forgot-password:hover {
+  color: #000046;
+}
+
+.error-message {
+  color: #F00000;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.required-indicator {
+  color: #00004673;
+  margin-bottom: 30px;
 }

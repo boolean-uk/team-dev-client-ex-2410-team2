@@ -28,6 +28,11 @@
   gap: 58px;
   margin-bottom: 48px;
 }
+.welcome-form-inputs-bio {
+  display: grid;
+  grid-template-rows: repeat(auto, auto);
+  margin-bottom: 48px;
+}
 .welcome-form-popup-wrapper {
   width: 470px;
   max-width: 100%;
