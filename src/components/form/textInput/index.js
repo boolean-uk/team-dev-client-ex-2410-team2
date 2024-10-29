@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import LockIcon from '../../../assets/icons/lockIcon';
 
-const TextInput = ({ value, onChange, name, label, icon, type = 'text', placeholder }) => {
-  const [input, setInput] = useState('');
+const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type = 'text' }) => {
   const [showpassword, setShowpassword] = useState(false);
 
   if (type === 'password') {
@@ -10,16 +9,12 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text', placehol
       <div className="inputwrapper">
         <label htmlFor={name}>{label}</label>
         <input
-          type={type}
+          type={showpassword ? 'text' : 'password'}
           name={name}
           value={value}
           placeholder={placeholder}
-          onChange={(e) => {
-            onChange(e);
-            setInput(e.target.value);
-          }}
+          onChange={(e) => onChange(e)}
         />
-        {showpassword && <input type="text" name={name} value={input} className="passwordreveal" />}
         <button
           className={`showpasswordbutton formbutton ${showpassword === true && '__faded'}`}
           onClick={(e) => {
