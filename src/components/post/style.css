@@ -7,6 +7,7 @@
   display: grid;
   grid-template-columns: 56px auto 48px;
   column-gap: 20px;
+  position: relative;
 }
 
 .post-user-name {
@@ -27,6 +28,12 @@
   width: 40px;
   height: 40px;
   background: #f0f5fa;
+  transition: 0.2s ease-in-out;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+  background: #e3e8ec;
 }
 
 .edit-icon p {
@@ -48,3 +55,4 @@
 .post-interactions-container p {
   text-align: right;
 }
+

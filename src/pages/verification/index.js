@@ -1,13 +1,15 @@
 import Button from '../../components/button';
 import TickIcon from '../../assets/tickIcon';
 import './verification.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Verification = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const data = location.state; // Access the passed data
 
   const onContinueClick = () => {
-    navigate('/welcome');
+    navigate('/welcome', { state: data });
   };
 
   return (

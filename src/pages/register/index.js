@@ -35,7 +35,9 @@ const Register = () => {
   };
 
   // Should also validate password
-  const validateAndRegister = (email, password) => {
+  const validateAndRegister = (e) => {
+    e.preventDefault();
+    const { email, password } = formData;
     if (validateEmail(email) && validatePassword(password)) {
       onRegister(email, password).then(function () {
         setErrorMsg('Email already in use');
@@ -65,7 +67,7 @@ const Register = () => {
         altButtonText="Log in"
       >
         <div className="register-form">
-          <form>
+          <form onSubmit={validateAndRegister}>
             <TextInput
               value={formData.email}
               onChange={onChange}
@@ -90,12 +92,9 @@ const Register = () => {
                 }
               />
             )}
+
+            <Button text="Sign up" type="submit" classes="green width-full" />
           </form>
-          <Button
-            text="Sign up"
-            onClick={() => validateAndRegister(formData.email, formData.password)}
-            classes="green width-full"
-          />
         </div>
       </CredentialsCard>
     </div>

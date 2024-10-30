@@ -1,18 +1,40 @@
+import { useState } from 'react';
 import useModal from '../../hooks/useModal';
 import Card from '../card';
 import Comment from '../comment';
+import DeletePostModal from '../deletePostModal';
+import EditDecisionModal from '../editDecisionModal';
 import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
 import './style.css';
 
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({
+  name,
+  date,
+  content,
+  comments = [],
+  likes = 0,
+  isLoggedIn = false,
+  isTeacher = false
+}) => {
   const { openModal, setModal } = useModal();
-
+  const [menuOptionOpen, setMenuOptionOpen] = useState(false);
   const userInitials = name.match(/\b(\w)/g);
+  const modalsMap = {
+    'Edit post': <EditPostModal />,
+    'Delete post?': <DeletePostModal />
+  };
 
-  const showModal = () => {
-    setModal('Edit post', <EditPostModal />);
+  console.log(isTeacher);
+
+  const handleDecisionClick = (decision) => {
+    setModal(decision, modalsMap[decision]);
     openModal();
+    setMenuOptionOpen(false);
+  };
+
+  const openMenuOptions = () => {
+    setMenuOptionOpen(!menuOptionOpen);
   };
 
   return (
@@ -25,12 +47,14 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
             <p>{name}</p>
             <small>{date}</small>
           </div>
-
-          <div className="edit-icon">
-            <p onClick={showModal}>...</p>
-          </div>
+          {/* Only render the menu option for the logged in user or if the user is a teacher. */}
+          {(isLoggedIn || isTeacher) && (
+            <div className="edit-icon" onClick={openMenuOptions}>
+              <p>...</p>
+              {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
+            </div>
+          )}
         </section>
-
         <section className="post-content">
           <p>{content}</p>
         </section>

@@ -33,6 +33,7 @@ const StepFour = ({ data, setData }) => {
       <Form className="welcome-form">
         <div className="welcome-form-inputs-bio">
           <textarea
+            autoFocus={true}
             name="bio"
             value={data.bio}
             onChange={handleChange}

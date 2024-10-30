@@ -17,7 +17,8 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     const errorMessage = await onLogin(formData.email, formData.password, rememberMe);
     if (errorMessage) {
       setError(errorMessage);
@@ -36,7 +37,7 @@ const Login = () => {
         altButtonText="Sign up"
       >
         <div className="login-form">
-          <form>
+          <form onSubmit={handleLogin}>
             <TextInput value={formData.email} onChange={onChange} name="email" label={'Email *'} />
             <TextInput
               value={formData.password}
@@ -61,10 +62,11 @@ const Login = () => {
                 Forgot password?
               </Link>
             </div>
+
+            <p className="required-indicator">*Required</p>
+            {error && <p className="error-message">{error}</p>}
+            <Button text="Log in" type="submit" classes="green width-full" />
           </form>
-          <p className="required-indicator">*Required</p>
-          {error && <p className="error-message">{error}</p>}
-          <Button text="Log in" onClick={handleLogin} classes="green width-full" />
         </div>
       </CredentialsCard>
     </div>

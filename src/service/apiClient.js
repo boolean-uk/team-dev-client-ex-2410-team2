@@ -12,8 +12,16 @@ async function register(email, password) {
   return response;
 }
 
-async function createProfile(userId, firstName, lastName, githubUrl, bio) {
-  return await patch(`users/${userId}`, { firstName, lastName, githubUrl, bio });
+async function createProfile(userId, firstName, lastName, userName, githubUrl, bio, photo, mobile) {
+  return await patch(`users/${userId}`, {
+    firstName,
+    lastName,
+    userName,
+    githubUrl,
+    bio,
+    photo,
+    mobile
+  });
 }
 
 async function getPosts() {
@@ -60,4 +68,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, getUsers };
+export { login, getPosts, register, createProfile, getUsers, get };

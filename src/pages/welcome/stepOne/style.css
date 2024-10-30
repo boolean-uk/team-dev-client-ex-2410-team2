@@ -1,0 +1,18 @@
+.welcome-form-profileimg-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.welcome-form-error {
+  color: red;
+  line-height: 0;
+  margin-bottom: 20px;
+}
+.welcome-form-profileimg-selections {
+  display: flex;
+  gap: 16px;
+}
+
+.text-blue1 {
+  cursor: pointer;
+}

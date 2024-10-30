@@ -6,18 +6,23 @@ import StepTwo from './stepTwo';
 import './style.css';
 import StepThree from './stepThree';
 import StepFour from './stepFour';
+import { useLocation } from 'react-router-dom';
 
 const Welcome = () => {
   const { onCreateProfile } = useAuth();
+  const location = useLocation();
+  const data = location.state;
 
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
     githubUsername: '',
-    email: '',
+    email: data.email,
     mobile: '',
-    password: '',
-    bio: ''
+    password: data.password,
+    bio: '',
+    userName: '',
+    photo: ''
   });
 
   const onPhotoChange = (photoData) => {
@@ -40,11 +45,13 @@ const Welcome = () => {
     onCreateProfile(
       profile.firstName,
       profile.lastName,
+      profile.userName,
       profile.githubUsername,
       profile.bio,
       profile.email,
       profile.mobile,
-      profile.password
+      profile.password,
+      profile.photo
     );
   };
 
@@ -55,7 +62,7 @@ const Welcome = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
+      <Stepper data={profile} header={<WelcomeHeader />} onComplete={onComplete}>
         <StepOne data={profile} setData={onChange} setPhoto={onPhotoChange} />
         <StepTwo data={profile} setData={onChange} />
         <StepThree data={profile} setData={onChange} />

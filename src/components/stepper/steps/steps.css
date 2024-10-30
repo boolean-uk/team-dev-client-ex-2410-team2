@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 40px 40px 40px 40px;
   justify-content: space-between;
-  z-index: 1;
+  z-index: 0;
   border-top: 1px solid var(--color-blue5);
   border-bottom: 1px solid var(--color-blue5);
   margin-bottom: 20px;

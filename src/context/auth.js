@@ -63,21 +63,23 @@ const AuthProvider = ({ children }) => {
     }
 
     setToken(res.data.token);
-    navigate('/verification');
+    navigate('/verification', { state: { email: email, password: password } });
   };
 
   const handleCreateProfile = async (
     firstName,
     lastName,
+    userName,
     githubUrl,
     bio,
     email,
     mobile,
-    password
+    password,
+    photo
   ) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, githubUrl, bio, email, mobile, password);
+    await createProfile(userId, firstName, lastName, userName, githubUrl, bio, photo, mobile);
 
     localStorage.setItem('token', token);
     navigate('/');

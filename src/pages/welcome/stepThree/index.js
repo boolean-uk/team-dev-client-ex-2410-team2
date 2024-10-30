@@ -10,6 +10,7 @@ const StepThree = ({ data, setData }) => {
       <Form className="welcome-form">
         <div className="welcome-form-inputs">
           <TextInput
+            focused={true}
             onChange={setData}
             value={'Student'}
             name="role"

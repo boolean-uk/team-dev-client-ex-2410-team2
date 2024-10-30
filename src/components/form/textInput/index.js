@@ -1,21 +1,55 @@
 import { useState } from 'react';
 import LockIcon from '../../../assets/icons/lockIcon';
+import './style.css';
 
-const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type = 'text' }) => {
+const TextInput = ({
+  focused,
+  value,
+  onChange,
+  name,
+  label,
+  icon,
+  placeholder = '',
+  type = 'text'
+}) => {
+  const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
+
+  const [isHighlighted, setIsHighlighted] = useState(false);
 
   if (type === 'password') {
     return (
       <div className="inputwrapper">
-        <label htmlFor={name}>{label}</label>
+        {(isHighlighted || value) && <label htmlFor={name}>{label}</label>}
         <input
           type={showpassword ? 'text' : 'password'}
           name={name}
           value={value}
-          placeholder={placeholder}
-          onChange={(e) => onChange(e)}
+          placeholder={label}
+          onChange={(e) => {
+            onChange(e);
+            setInput(e.target.value);
+          }}
+          onFocus={(e) => {
+            e.target.placeholder = '';
+            setIsHighlighted(true);
+          }}
+          onBlur={(e) => {
+            e.target.placeholder = label;
+            setIsHighlighted(false);
+          }}
         />
+        {showpassword && (
+          <input
+            type="text"
+            name={name}
+            value={input}
+            onChange={onChange}
+            className="passwordreveal"
+          />
+        )}
         <button
+          type="button"
           className={`showpasswordbutton formbutton ${showpassword === true && '__faded'}`}
           onClick={(e) => {
             e.preventDefault();
@@ -24,6 +58,23 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type 
         >
           <EyeLogo />
         </button>
+      </div>
+    );
+  } else if (type === 'passwordReadOnly') {
+    return (
+      <div className="inputwrapper">
+        {<label htmlFor={name}>{label}</label>}
+        <input
+          type={'password'}
+          name={name}
+          value={value}
+          onChange={onChange}
+          readOnly={true}
+          className={'input-field placeholder-style'}
+        />
+        <div className="lockicon-container">
+          <LockIcon />
+        </div>
       </div>
     );
   } else if (type === 'readOnly') {
@@ -46,14 +97,27 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type 
   } else {
     return (
       <div className="inputwrapper">
-        {label && <label htmlFor={name}>{label}</label>}
+        {label && (isHighlighted || value) && (
+          <label className="input-label" htmlFor={name}>
+            {label}
+          </label>
+        )}
         <input
           type={type}
           name={name}
           value={value}
-          placeholder={placeholder}
+          placeholder={label}
           onChange={onChange}
           className={icon && 'input-has-icon'}
+          onFocus={(e) => {
+            e.target.placeholder = '';
+            setIsHighlighted(true);
+          }}
+          onBlur={(e) => {
+            e.target.placeholder = label;
+            setIsHighlighted(false);
+          }}
+          autoFocus={focused}
         />
         {icon && <span className="input-icon">{icon}</span>}
       </div>
