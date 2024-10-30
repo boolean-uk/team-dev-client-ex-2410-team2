@@ -4,10 +4,13 @@ import HomeIcon from '../../assets/icons/homeIcon';
 import ProfileIcon from '../../assets/icons/profileIcon';
 import useAuth from '../../hooks/useAuth';
 import './style.css';
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
 
 const Navigation = () => {
   const { token } = useAuth();
-
+  const userID = jwt_decode(token).userId;
+  console.log(userID); // Debug
   if (!token) {
     return null;
   }
@@ -22,7 +25,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/profile/1">
+          <NavLink to={`/profile/${userID}`}>
             <ProfileIcon />
             <p>Profile</p>
           </NavLink>

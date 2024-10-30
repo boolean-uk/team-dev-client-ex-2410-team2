@@ -7,11 +7,13 @@ import CogIcon from '../../assets/icons/cogIcon';
 import LogoutIcon from '../../assets/icons/logoutIcon';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
 
 const Header = () => {
   const { token, onLogout } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-
+  const userID = jwt_decode(token).userId;
   const onClickProfileIcon = () => {
     setIsMenuVisible(!isMenuVisible);
   };
@@ -45,7 +47,7 @@ const Header = () => {
             <section className="user-panel-options border-top">
               <ul>
                 <li>
-                  <NavLink to="/profile/1">
+                  <NavLink to={`/profile/${userID}`}>
                     <ProfileIcon /> <p>Profile</p>
                   </NavLink>
                 </li>
