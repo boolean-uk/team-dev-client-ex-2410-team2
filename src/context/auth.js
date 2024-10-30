@@ -21,7 +21,9 @@ const AuthProvider = ({ children }) => {
 
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.state?.from?.pathname || '/');
+      console.log(location.state?.from);
+      navigate(location || '/'); // This does work but it is probably not the intended way of doing this.
+      // navigate(location.state?.from?.pathname || '/'); //This does not work due to state not being defined.
     }
   }, [location.state?.from?.pathname, navigate]);
 
@@ -96,7 +98,10 @@ const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
   const location = useLocation();
 
+  console.log('ProtectedRoute: token', token); // Debugging line
+
   if (!token) {
+    console.log('ProtectedRoute: No token, redirecting to login'); // Debugging line
     return <Navigate to={'/login'} replace state={{ from: location }} />;
   }
 
