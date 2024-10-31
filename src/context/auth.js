@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
       }
 
       localStorage.setItem('token', res.data.token);
-      setToken(res.token);
+      setToken(res.data.token);
 
       if (rememberMe) {
         // TODO: Implement remember me functionality, extend token expiration.

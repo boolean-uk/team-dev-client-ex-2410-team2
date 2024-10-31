@@ -8,11 +8,8 @@ import CreatePostModal from '../../components/createPostModal';
 import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
-
 import SearchList from '../../components/searchList';
-
 import useAuth from '../../hooks/useAuth';
-
 import CohortList from '../../components/lists/cohortList/index';
 
 import './style.css';
