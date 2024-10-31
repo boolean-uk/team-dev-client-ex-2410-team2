@@ -10,6 +10,9 @@ import Card from '../../components/card';
 import ProfileCircle from '../../components/profileCircle';
 import { get } from '../../service/apiClient';
 import NotificationPopup from '../../components/notificationPopup';
+import Button from '../../components/button';
+import useModal from '../../hooks/useModal';
+import SaveProfileModal from '../../components/saveProfileModal';
 
 const Profile = () => {
   // const { onCreateProfile } = useAuth();
@@ -70,10 +73,20 @@ const Profile = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState(<NotificationPopup />);
 
+  const { openModal, setModal } = useModal();
+
+  useEffect(() => {
+    setModal('Save Changes', <SaveProfileModal />);
+  }, []);
+
   const onClick = (event) => {
     console.log('Notification sent');
     setNotificationMessage(firstLetterToUpperCase(event.target.name) + ' is locked');
     setShowNotification(true);
+  };
+
+  const handleSave = () => {
+    openModal();
   };
 
   const firstLetterToUpperCase = (string) => {
@@ -103,6 +116,10 @@ const Profile = () => {
             </div>
             <div className="grid-item">
               <StepFour data={profile} setData={onChange} />
+              <div className="grid-buttons">
+                <Button text={'Cancel'} classes="button offwhite" />
+                <Button text={'Save'} classes="blue" onClick={handleSave} />
+              </div>
             </div>
           </div>
         </Card>

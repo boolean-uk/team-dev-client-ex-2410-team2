@@ -41,3 +41,13 @@
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding: 20px 0;
 }
+
+.grid-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.grid-buttons button {
+    margin-right: 10px;
+}

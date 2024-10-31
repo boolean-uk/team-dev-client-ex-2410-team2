@@ -1,0 +1,9 @@
+.save-profile-modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.save-profile-modal-buttons * {
+    margin: 10px;
+}
