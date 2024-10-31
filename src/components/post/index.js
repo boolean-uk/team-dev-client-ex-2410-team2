@@ -113,60 +113,61 @@ const Post = ({
             <p>{content}</p>
           </section>
 
-        <section
-          className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}
-        >
-          <div className="post-interactions">
-            <div onClick={toggleLike}>
-              {isLiked ? <FilledHeartIcon /> : <UnfilledHeartIcon />}
-              <span className="like">Like</span>
+          <section
+            className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}
+          >
+            <div className="post-interactions">
+              <div onClick={toggleLike}>
+                {isLiked ? <FilledHeartIcon /> : <UnfilledHeartIcon />}
+                <span className="like">Like</span>
+              </div>
+              <div onClick={toggleComment}>
+                {isCommented ? <FilledCommentIcon /> : <UnfilledCommentIcon />}
+                <span>Comment</span>
+              </div>
             </div>
-            <div onClick={toggleComment}>
-              {isCommented ? <FilledCommentIcon /> : <UnfilledCommentIcon />}
-              <span>Comment</span>
-            </div>
-          </div>
 
             <p>{!likes && 'Be the first to like this'}</p>
           </section>
 
-        <section>
-          {/* This is only for showing a hardcoded comment. <Comment> </Comment> needs to be removed, and hardcoded values needs to be removed from comments and replaced with dynamic values. */}
-          <Comment></Comment>
-          {comments.map((comment) =>
-            isCommented ? (
-              <Comment
-                key={comment.id}
-                name={comment.name}
-                userInitials={userInitials}
-                content={comment.content}
-              />
-            ) : (
-              <></>
-            )
-          )}
-        </section>
-        {/* This doesnt handle anything with the backend. Comment functionality needs to be implemented first backend.  */}
-        <section>
-          <form className="comment-input" onSubmit={handleCommentSubmit}>
-            <ProfileCircle initials={userInitials} />
-            <div className="input-container">
-              <input
-                type="text"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                placeholder="Add a comment..."
-                className="comment-field"
-                required
-              />
-              <button type="submit">
-                <PostIcon />
-              </button>
-            </div>
-          </form>
-        </section>
-      </article>
-    </Card>
+          <section>
+            {/* This is only for showing a hardcoded comment. <Comment> </Comment> needs to be removed, and hardcoded values needs to be removed from comments and replaced with dynamic values. */}
+            <Comment></Comment>
+            {comments.map((comment) =>
+              isCommented ? (
+                <Comment
+                  key={comment.id}
+                  name={comment.name}
+                  userInitials={userInitials}
+                  content={comment.content}
+                />
+              ) : (
+                <></>
+              )
+            )}
+          </section>
+          {/* This doesnt handle anything with the backend. Comment functionality needs to be implemented first backend.  */}
+          <section>
+            <form className="comment-input" onSubmit={handleCommentSubmit}>
+              <ProfileCircle initials={userInitials} />
+              <div className="input-container">
+                <input
+                  type="text"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  placeholder="Add a comment..."
+                  className="comment-field"
+                  required
+                />
+                <button type="submit">
+                  <PostIcon />
+                </button>
+              </div>
+            </form>
+          </section>
+        </article>
+      </Card>
+    </>
   );
 };
 
