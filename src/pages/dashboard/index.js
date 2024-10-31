@@ -8,6 +8,8 @@ import CreatePostModal from '../../components/createPostModal';
 import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
+import NotificationPopup from '../../components/notificationPopup';
+import { transformUsernameToInitials } from '../../service/utils';
 
 import SearchList from '../../components/searchList';
 
@@ -23,6 +25,7 @@ const Dashboard = () => {
   const [filteredUsers, setFilteredUsers] = useState(users);
   const [isListVisible, setIsListVisible] = useState(false);
   const [user, setUser] = useState(null);
+  const [notification, setNotification] = useState(null);
   const { getLoggedInUserId } = useAuth();
   const userId = getLoggedInUserId();
 
@@ -52,7 +55,7 @@ const Dashboard = () => {
   // Create a function to run on user interaction
   const showModal = () => {
     // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
+    setModal('Create a post', <CreatePostModal setNotification={setNotification} />); // CreatePostModal is just a standard React component, nothing special
 
     // Open the modal!
     openModal();
@@ -90,12 +93,21 @@ const Dashboard = () => {
         <Card>
           <div className="create-post-input">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>{user && transformUsernameToInitials(`${user.firstName} ${user.lastName}`)}</p>
             </div>
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>
         <Posts />
+        <div className="notification-container">
+          {notification && (
+            <NotificationPopup
+              actionText="Edit"
+              message={notification}
+              className="delete-notification"
+            />
+          )}
+        </div>
       </main>
 
       <aside>
