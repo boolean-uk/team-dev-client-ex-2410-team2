@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -7,11 +7,16 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import ShowListofUsers from '../../components/showListofUsers/ShowListofUsers';
+import { getUsers } from '../../service/apiClient';
 
 import './style.css';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    console.log('Fetching users...');
+  }, []);
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -19,6 +24,9 @@ const Dashboard = () => {
 
   // Use the useModal hook to get the openModal and setModal functions
   const { openModal, setModal } = useModal();
+
+  const teachers = users.filter((user) => user.role === 'TEACHER');
+  const students = users.filter((user) => user.role === 'STUDENT');
 
   // Create a function to run on user interaction
   const showModal = () => {
@@ -52,7 +60,8 @@ const Dashboard = () => {
         </Card>
 
         <Card>
-          <ShowListofUsers></ShowListofUsers>
+          <ShowListofUsers users={students}></ShowListofUsers>
+          <ShowListofUsers users={teachers}></ShowListofUsers>
         </Card>
       </aside>
     </>

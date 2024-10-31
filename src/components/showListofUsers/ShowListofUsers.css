@@ -1,7 +1,42 @@
 .user-list {
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
   padding-right: 10px;
+}
+.user-list-button {
+  /* Button */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 32px; /* Increased padding for a larger button */
+  gap: 8px;
+
+  /* Neutral Blue 6 */
+  background: #f0f5fa;
+  border-radius: 8px;
+
+  /* Label */
+  width: 180px; /* Adjusted width for larger size */
+  height: 40px; /* Adjusted height for larger size */
+
+  /* Body B1 */
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px; /* Increased font size */
+  line-height: 28px;
+  text-align: center;
+
+  /* Neutral Blue 1 */
+  color: #64648c;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 1;
 }
 
 .cohort-header p {
