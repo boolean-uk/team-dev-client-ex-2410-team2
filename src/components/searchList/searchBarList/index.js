@@ -1,12 +1,14 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import UserListItemSpecialism from '../../userListComponents/userListItemSpecialism/UserListItemSpecialism';
 import './style.css';
 
 const SearchList = ({ users, setIsSearchPage, isSearchPage }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  // const [isExpanded, setIsExpanded] = useState(false);
+  const isMinimized = users.length > 1 && users.length < 10;
+  const isExpanded = users.length > 10;
 
   const handleSearchPage = () => {
-    setIsExpanded((prev) => !prev);
+    // setIsExpanded((prev) => !prev);
     setIsSearchPage(!isSearchPage);
   };
 
@@ -16,20 +18,14 @@ const SearchList = ({ users, setIsSearchPage, isSearchPage }) => {
         <p>People</p>
       </section>
       <section className="search-list-results">
-        {users.length > 0 &&
-          users.length < 9 &&
+        {isMinimized &&
           users
             .slice(0, isExpanded ? users.length : 3)
             .map((user) => <UserListItemSpecialism user={user} key={user.id} />)}
 
-        {users.length > 10 &&
-          users
-            .slice(0, isExpanded ? users.length : 3)
-            .map((user) => <UserListItemSpecialism user={user} key={user.id} />)}
+        {isExpanded && users.map((user) => <UserListItemSpecialism user={user} key={user.id} />)}
 
-        {users.length > 0 && users.length < 9 && (
-          <button onClick={handleSearchPage}>All results</button>
-        )}
+        <button onClick={handleSearchPage}>All results</button>
 
         {users.length === 0 && (
           <div className="search-list-no-results">
