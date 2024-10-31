@@ -85,11 +85,10 @@ const Post = ({
   };
 
   return (
-    <>
-      <Card>
-        <article className="post">
-          <section className="post-details">
-            <ProfileCircle initials={userInitials} />
+    <Card>
+      <article className="post">
+        <section className="post-details">
+          <ProfileCircle userData={author} initials={userInitials} />
 
             <div className="post-user-name">
               <p>{name}</p>
