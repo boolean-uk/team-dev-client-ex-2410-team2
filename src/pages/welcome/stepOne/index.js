@@ -67,21 +67,21 @@ const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
           )}
           <TextInput
             onChange={setData}
-            value={data.userName}
-            name="userName"
+            value={data.username}
+            name="username"
             label={'User name*'}
           />
-          {validating && !data.userName && (
+          {validating && !data.username && (
             <p className="welcome-form-error">Please enter a user name</p>
           )}
           <TextInput
             onChange={setData}
-            value={data.githubUsername}
-            name="githubUsername"
-            label={'Github Username*'}
+            value={data.githubUrl}
+            name="githubUrl"
+            label={'Github Url*'}
           />
-          {validating && !data.githubUsername && (
-            <p className="welcome-form-error">Please enter a github username</p>
+          {validating && !data.githubUrl && (
+            <p className="welcome-form-error">Please enter a github url</p>
           )}
           <p className="text-blue1">*Required</p>
         </div>

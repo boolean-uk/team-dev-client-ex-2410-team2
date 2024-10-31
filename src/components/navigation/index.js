@@ -10,7 +10,6 @@ import jwt_decode from 'jwt-decode';
 const Navigation = () => {
   const { token } = useAuth();
   const userID = jwt_decode(token).userId;
-  console.log(userID); // Debug
   if (!token) {
     return null;
   }

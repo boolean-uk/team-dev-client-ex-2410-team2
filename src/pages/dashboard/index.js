@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-import { getUsers, get } from '../../service/apiClient';
-
+import { useEffect, useState } from 'react';
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -9,9 +7,8 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 
-import SearchList from '../../components/searchList';
-
 import useAuth from '../../hooks/useAuth';
+import { get } from '../../service/apiClient';
 
 import CohortList from '../../components/lists/cohortList/index';
 
@@ -19,24 +16,9 @@ import './style.css';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
-  const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState(users);
-  const [isListVisible, setIsListVisible] = useState(false);
   const [user, setUser] = useState(null);
   const { getLoggedInUserId } = useAuth();
   const userId = getLoggedInUserId();
-
-  useEffect(() => {
-    getUsers().then(setUsers);
-  }, []);
-
-  useEffect(() => {
-    setFilteredUsers(
-      users.filter((user) =>
-        `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchVal.toLowerCase())
-      )
-    );
-  }, [searchVal, users]);
 
   useEffect(() => {
     get(`users/${userId}`).then((response) => setUser(response.data.user));
@@ -100,23 +82,10 @@ const Dashboard = () => {
 
       <aside>
         <Card>
-          <form
-            onClick={() => setIsListVisible(!isListVisible)}
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <TextInput
-              type="search"
-              icon={<SearchIcon />}
-              value={searchVal}
-              name="Search"
-              onChange={onChange}
-              placeholder="Search for people"
-            />
+          <form onSubmit={(e) => e.preventDefault()}>
+            <TextInput icon={<SearchIcon />} value={searchVal} name="Search" onChange={onChange} />
           </form>
         </Card>
-
-        {isListVisible && <SearchList users={filteredUsers} />}
-
         {renderComponentBasedOnRole(user && user.role)}
       </aside>
     </>

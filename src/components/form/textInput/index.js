@@ -12,8 +12,6 @@ const TextInput = ({
   placeholder = '',
   type = 'text'
 }) => {
-  const [input, setInput] = useState('');
-
   const [showpassword, setShowpassword] = useState(false);
 
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -29,7 +27,6 @@ const TextInput = ({
           placeholder={label}
           onChange={(e) => {
             onChange(e);
-            setInput(e.target.value);
           }}
           onFocus={(e) => {
             e.target.placeholder = '';
@@ -40,15 +37,6 @@ const TextInput = ({
             setIsHighlighted(false);
           }}
         />
-        {showpassword && (
-          <input
-            type="text"
-            name={name}
-            value={input}
-            onChange={onChange}
-            className="passwordreveal"
-          />
-        )}
         <button
           type="button"
           className={`showpasswordbutton formbutton ${showpassword === true && '__faded'}`}

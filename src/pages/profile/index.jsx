@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-// import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { useState, useEffect } from 'react';
 import StepOne from '../welcome/stepOne';
 import StepTwo from '../welcome/stepTwo';
@@ -15,31 +15,33 @@ import useModal from '../../hooks/useModal';
 import SaveProfileModal from '../../components/saveProfileModal';
 
 const Profile = () => {
-  // const { onCreateProfile } = useAuth();
+  const { onCreateProfile } = useAuth();
   const { id } = useParams();
   let user = {};
-  console.log(id); // Debug
   const setUser = () => {
     get(`users/${id}`).then((response) => {
       user = response.data.user;
+      console.log(user);
+      setProfile({ ...profile, ...user });
     });
   };
   // setUser();
   const [profile, setProfile] = useState({
-    firstName: 'Daniel',
-    lastName: 'Roli',
-    githubUsername: '',
+    firstName: 'A',
+    lastName: 'A',
+    githubUrl: '',
     email: '',
     mobile: '',
     password: '',
     bio: '',
-    userName: '',
+    username: '',
     photo: ''
   });
 
   useEffect(() => {
     setUser();
-  }, [user]);
+  }, []);
+
   const onPhotoChange = (photoData) => {
     setProfile({
       ...profile,
@@ -56,19 +58,19 @@ const Profile = () => {
     });
   };
 
-  /* const onComplete = () => {
+  const onComplete = () => {
+    console.log(profile);
     onCreateProfile(
       profile.firstName,
       profile.lastName,
-      profile.userName,
+      profile.username,
       profile.githubUsername,
       profile.bio,
       profile.email,
       profile.mobile,
-      profile.password,
       profile.photo
     );
-  }; */
+  };
 
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState(<NotificationPopup />);

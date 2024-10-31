@@ -1,9 +1,10 @@
+// import { useLocation } from 'react-router-dom';
 import Form from '../../../components/form';
 import { useEffect, useState } from 'react';
 
 const StepFour = ({ data, setData }) => {
   const [characterCount, setCharacterCount] = useState(0);
-
+  // const location = useLocation();
   data.bio = data.bio || '';
 
   useEffect(() => {
