@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../../components/card';
 import SearchPageList from '../../components/searchList/searchPageList';
 import { getUsers } from '../../service/apiClient';
@@ -11,6 +12,8 @@ const SearchResultsPage = ({ isSearchPage, setIsSearchPage }) => {
   const [filteredUsers, setFilteredUsers] = useState(users);
   const [searchVal, setSearchVal] = useState('');
   const [isListVisible, setIsListVisible] = useState(false);
+
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -34,7 +37,9 @@ const SearchResultsPage = ({ isSearchPage, setIsSearchPage }) => {
 
   const handlePrev = () => {
     // Should implement function that takes you to previous
-    alert('Should take you to previous page');
+    // alert('Should take you to previous page');
+    setIsSearchPage(false);
+    navigate('/dashboard');
   };
 
   return (
