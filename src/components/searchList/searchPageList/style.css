@@ -1,0 +1,15 @@
+.search-page-results-header p {
+    color: #64648C;
+    margin: 10px 15px 20px 0;
+}
+
+button {
+    color: #64648C;
+    background-color: #F0F5FA;
+    margin: 15px 0;
+}
+
+.search-page-noresults p {
+    color: #64648C;
+    margin: 15px 0;
+}
