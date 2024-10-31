@@ -1,8 +1,10 @@
 .cohort-page {
+    padding: 2rem 4rem 2rem 2rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 20px;
     width: 100%;
+    grid-column: 2 / 4;
 }
 
 .cohort-container {
@@ -38,4 +40,27 @@ h3 {
     height: 1px;
     background: #e0e0e0;
     margin-top: 1rem;
+}
+
+.person-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    gap: 60px;
+    margin: 1rem 0;
+}
+
+.person-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dots-background {
+    background: lightgray;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

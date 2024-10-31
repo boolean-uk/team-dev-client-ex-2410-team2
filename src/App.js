@@ -9,6 +9,7 @@ import { AuthProvider, ProtectedRoute } from './context/auth';
 import { ModalProvider } from './context/modal';
 import Welcome from './pages/welcome';
 import ForgotPassword from './pages/forgotPassword';
+import Cohort from './pages/cohort';
 
 const App = () => {
   return (
@@ -35,6 +36,14 @@ const App = () => {
               element={
                 <ProtectedRoute disabledNav={true}>
                   <Welcome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="cohort"
+              element={
+                <ProtectedRoute>
+                  <Cohort />
                 </ProtectedRoute>
               }
             />
