@@ -2,18 +2,23 @@ import React from 'react';
 import './style.css';
 import CheckmarkIcon from '../../assets/icons/checkmarkIcon';
 
-const NotificationPopup = ({ message, actionText, onAction }) => {
+const NotificationPopup = ({ message, actionText, className, onAction }) => {
   return (
-    <div className="snackbar">
-      <div className="snackbar-icon">
-        <CheckmarkIcon />
+    <div className="snackbar-page-wrapper">
+      <div className={`snackbar ${className}`}>
+        <div className="snackbar-left">
+          <div className="snackbar-icon">
+            <CheckmarkIcon />
+          </div>
+
+          <span className="snackbar-message">{message}</span>
+        </div>
+        {actionText && (
+          <a onClick={onAction} className="snackbar-action">
+            {actionText}
+          </a>
+        )}
       </div>
-      <span className="snackbar-message">{message}</span>
-      {actionText && (
-        <button onClick={onAction} className="snackbar-action">
-          {actionText}
-        </button>
-      )}
     </div>
   );
 };
