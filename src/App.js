@@ -9,8 +9,12 @@ import { AuthProvider, ProtectedRoute } from './context/auth';
 import { ModalProvider } from './context/modal';
 import Welcome from './pages/welcome';
 import ForgotPassword from './pages/forgotPassword';
+import SearchResultsPage from './pages/searchResultsPage';
+import { useState } from 'react';
 
 const App = () => {
+  const [isSearchPage, setIsSearchPage] = useState(false);
+
   return (
     <>
       <AuthProvider>
@@ -26,7 +30,14 @@ const App = () => {
               index
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  {isSearchPage ? (
+                    <SearchResultsPage
+                      isSearchPage={isSearchPage}
+                      setIsSearchPage={setIsSearchPage}
+                    />
+                  ) : (
+                    <Dashboard isSearchPage={isSearchPage} setIsSearchPage={setIsSearchPage} />
+                  )}
                 </ProtectedRoute>
               }
             />
