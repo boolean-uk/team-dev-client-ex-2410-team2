@@ -147,24 +147,28 @@ const Post = ({
             )}
           </section>
           {/* This doesnt handle anything with the backend. Comment functionality needs to be implemented first backend.  */}
-          <section>
-            <form className="comment-input" onSubmit={handleCommentSubmit}>
-              <ProfileCircle initials={userInitials} />
-              <div className="input-container">
-                <input
-                  type="text"
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                  placeholder="Add a comment..."
-                  className="comment-field"
-                  required
-                />
-                <button type="submit">
-                  <PostIcon />
-                </button>
-              </div>
+          <article className="post">
+            <form onSubmit={handleCommentSubmit}>
+              <section className="comment-wrapper new-comment-container">
+                <div className="profile-circle-container">
+                  <ProfileCircle initials={userInitials} />
+                </div>
+                <div className="comment-container new-comment-input">
+                  <input
+                    type="text"
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    placeholder="Add a comment..."
+                    className="comment-field"
+                    required
+                  />
+                  <div className="post-icon-wrapper">
+                    <PostIcon />
+                  </div>
+                </div>
+              </section>
             </form>
-          </section>
+          </article>
         </article>
       </Card>
     </>

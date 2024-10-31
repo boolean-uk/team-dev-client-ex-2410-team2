@@ -99,46 +99,47 @@
   margin-left: 8px;
 }
 
-.comment-input-section {
+/* Specific styles for the new comment input field */
+.new-comment-container {
   display: flex;
-  align-items: center;
-  margin-top: 16px;
+  align-items: center; /* Center vertically with profile icon */
+  margin-bottom: 10px;
 }
 
-.comment-input {
+.new-comment-input {
+  flex: 1;
+  position: relative;
   display: flex;
-  align-items: center;
-  margin-top: 10px;
-  padding: 2px;
-}
-
-.input-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
+  align-items: center; /* Center the input with the profile icon */
 }
 
 .comment-field {
-  flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
-  outline: none;
-}
-
-.send-button {
-  background: none;
+  background: #e6ebf5;
   border: none;
-  padding: 0;
-  margin-left: -40px; /* Adjust this value to position the icon correctly */
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 8px;
+  padding: 12px 40px 12px 12px; /* Padding for icon */
+  width: 100%;
+  font-size: 16px;
+  font-family: 'Lexend', sans-serif;
+  color: #64648c;
+  box-sizing: border-box;
 }
 
-.send-button svg {
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
+.comment-field::placeholder {
+  color: #64648c;
+}
+
+/* Styling for the post icon */
+.post-icon-wrapper {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.post-icon-wrapper svg {
+  width: 32px;
+  height: 32px;
+  fill: #000046;
 }
