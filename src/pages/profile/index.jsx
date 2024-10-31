@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import useAuth from '../../hooks/useAuth';
 import StepOne from '../welcome/stepOne';
 import StepTwo from '../welcome/stepTwo';
 import StepThree from '../welcome/stepThree';
@@ -14,7 +15,7 @@ import useModal from '../../hooks/useModal';
 import SaveProfileModal from '../../components/saveProfileModal';
 
 const Profile = () => {
-  // const { onCreateProfile } = useAuth();
+  const { onCreateProfile } = useAuth();
   const { id } = useParams();
   let user = {};
   const setUser = () => {
@@ -62,7 +63,7 @@ const Profile = () => {
     });
   };
 
-  /* const onComplete = () => {
+  const onComplete = () => {
     console.log(profile);
     onCreateProfile(
       profile.firstName,
@@ -81,7 +82,6 @@ const Profile = () => {
       profile.specialism
     );
   };
-  */
 
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState(<NotificationPopup />);
@@ -114,6 +114,7 @@ const Profile = () => {
   };
 
   const handleSaveModal = () => {
+    onComplete();
     setNotificationMessage('Profile saved');
     setNotificationVariant('success');
     setShowNotification(true);
