@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import UserListItemSpecialism from '../userListComponents/userListItemSpecialism/UserListItemSpecialism';
+import UserListItemSpecialism from '../../userListComponents/userListItemSpecialism/UserListItemSpecialism';
 import './style.css';
 
-const SearchList = ({ users }) => {
+const SearchList = ({ users, setIsSearchPage, isSearchPage }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleExpand = () => {
+  const handleSearchPage = () => {
     setIsExpanded((prev) => !prev);
+    setIsSearchPage(!isSearchPage);
   };
 
   return (
@@ -21,8 +22,13 @@ const SearchList = ({ users }) => {
             .slice(0, isExpanded ? users.length : 3)
             .map((user) => <UserListItemSpecialism user={user} key={user.id} />)}
 
+        {users.length > 10 &&
+          users
+            .slice(0, isExpanded ? users.length : 3)
+            .map((user) => <UserListItemSpecialism user={user} key={user.id} />)}
+
         {users.length > 0 && users.length < 9 && (
-          <button onClick={toggleExpand}>{isExpanded ? 'See less results' : 'All results'}</button>
+          <button onClick={handleSearchPage}>All results</button>
         )}
 
         {users.length === 0 && (

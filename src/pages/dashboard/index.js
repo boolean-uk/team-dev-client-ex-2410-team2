@@ -9,7 +9,7 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 
-import SearchList from '../../components/searchList';
+import SearchList from '../../components/searchList/searchBarList';
 
 import useAuth from '../../hooks/useAuth';
 
@@ -17,7 +17,7 @@ import CohortList from '../../components/lists/cohortList/index';
 
 import './style.css';
 
-const Dashboard = () => {
+const Dashboard = ({ isSearchPage, setIsSearchPage }) => {
   const [searchVal, setSearchVal] = useState('');
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState(users);
@@ -115,7 +115,13 @@ const Dashboard = () => {
           </form>
         </Card>
 
-        {isListVisible && <SearchList users={filteredUsers} />}
+        {isListVisible && (
+          <SearchList
+            users={filteredUsers}
+            isSearchPage={isSearchPage}
+            setIsSearchPage={setIsSearchPage}
+          />
+        )}
 
         {renderComponentBasedOnRole(user && user.role)}
       </aside>
