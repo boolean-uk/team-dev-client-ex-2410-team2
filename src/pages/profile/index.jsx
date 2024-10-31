@@ -72,21 +72,40 @@ const Profile = () => {
 
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState(<NotificationPopup />);
+  const [notificationVariant, setNotificationVariant] = useState('none');
+  const [notificationActionText, setNotificationActionText] = useState(null);
 
-  const { openModal, setModal } = useModal();
+  const { openModal, setModal, closeModal } = useModal();
 
   useEffect(() => {
-    setModal('Save Changes', <SaveProfileModal />);
+    setModal(
+      'Save Changes',
+      <SaveProfileModal onDontSave={handleDontSave} onSave={handleSaveModal} />
+    );
   }, []);
 
   const onClick = (event) => {
     console.log('Notification sent');
     setNotificationMessage(firstLetterToUpperCase(event.target.name) + ' is locked');
+    setNotificationVariant('none');
+    setNotificationActionText(null);
     setShowNotification(true);
   };
 
-  const handleSave = () => {
-    openModal();
+  const handleDontSave = () => {
+    setNotificationMessage('Changes discarded');
+    setNotificationVariant('success');
+    setShowNotification(true);
+    setNotificationActionText('Undo');
+    closeModal();
+  };
+
+  const handleSaveModal = () => {
+    setNotificationMessage('Profile saved');
+    setNotificationVariant('success');
+    setShowNotification(true);
+    setNotificationActionText('Edit');
+    closeModal();
   };
 
   const firstLetterToUpperCase = (string) => {
@@ -118,7 +137,7 @@ const Profile = () => {
               <StepFour data={profile} setData={onChange} />
               <div className="grid-buttons">
                 <Button text={'Cancel'} classes="button offwhite" />
-                <Button text={'Save'} classes="blue" onClick={handleSave} />
+                <Button text={'Save'} classes="blue" onClick={openModal} />
               </div>
             </div>
           </div>
@@ -128,7 +147,8 @@ const Profile = () => {
         <NotificationPopup
           message={notificationMessage}
           onAction={() => setShowNotification(false)}
-          variant="none"
+          variant={notificationVariant}
+          actionText={notificationActionText}
         />
       )}
     </>
