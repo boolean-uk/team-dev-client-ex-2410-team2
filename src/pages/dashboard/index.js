@@ -8,8 +8,6 @@ import CreatePostModal from '../../components/createPostModal';
 import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
-import NotificationPopup from '../../components/notificationPopup';
-import { transformUsernameToInitials } from '../../service/utils';
 import SearchBarList from '../../components/searchList/searchBarList';
 import useAuth from '../../hooks/useAuth';
 
