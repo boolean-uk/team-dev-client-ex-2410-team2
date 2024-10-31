@@ -12,6 +12,8 @@ const TextInput = ({
   placeholder = '',
   type = 'text'
 }) => {
+  const [input, setInput] = useState('');
+
   const [showpassword, setShowpassword] = useState(false);
 
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -27,6 +29,7 @@ const TextInput = ({
           placeholder={label}
           onChange={(e) => {
             onChange(e);
+            setInput(e.target.value);
           }}
           onFocus={(e) => {
             e.target.placeholder = '';
@@ -37,6 +40,15 @@ const TextInput = ({
             setIsHighlighted(false);
           }}
         />
+        {showpassword && (
+          <input
+            type="text"
+            name={name}
+            value={input}
+            onChange={onChange}
+            className="passwordreveal"
+          />
+        )}
         <button
           type="button"
           className={`showpasswordbutton formbutton ${showpassword === true && '__faded'}`}
@@ -81,6 +93,34 @@ const TextInput = ({
         <div className="lockicon-container">
           <LockIcon />
         </div>
+      </div>
+    );
+  } else if (type === 'search') {
+    return (
+      <div className="inputwrapper">
+        {label && (isHighlighted || value) && (
+          <label className="input-label" htmlFor={name}>
+            {label}
+          </label>
+        )}
+        <input
+          type={type}
+          name={name}
+          value={value}
+          placeholder={label}
+          onChange={onChange}
+          className={icon && 'input-has-icon'}
+          onFocus={(e) => {
+            e.target.placeholder = '';
+            setIsHighlighted(true);
+          }}
+          onBlur={(e) => {
+            e.target.placeholder = 'Search for people';
+            setIsHighlighted(false);
+          }}
+          autoFocus={focused}
+        />
+        {icon && <span className="input-icon">{icon}</span>}
       </div>
     );
   } else {
