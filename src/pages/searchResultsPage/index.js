@@ -5,6 +5,7 @@ import SearchPageList from '../../components/searchList/searchPageList';
 import { getUsers } from '../../service/apiClient';
 import TextInput from '../../components/form/textInput';
 import SearchIcon from '../../assets/icons/searchIcon';
+import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
 import './style.css';
 
 const SearchResultsPage = ({ isSearchPage, setIsSearchPage }) => {
@@ -44,7 +45,9 @@ const SearchResultsPage = ({ isSearchPage, setIsSearchPage }) => {
     <>
       <section className="search-results-page">
         <div className="search-page-header">
-          <p onClick={handlePrev}>&lt;-</p>
+          <div className="navigation-arrow" onClick={handlePrev}>
+            <ArrowLeftIcon />
+          </div>
           <h2>Seach Results</h2>
         </div>
         <div className="search-page-results">
