@@ -52,7 +52,59 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.post-interactions div {
+  display: flex;
+  align-items: center;
+}
+
 .post-interactions-container p {
   text-align: right;
 }
 
+.post-interactions .like {
+  margin-left: 8px;
+}
+
+.comment-input-section {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.comment-input {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 2px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.comment-field {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  outline: none;
+}
+
+.send-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: -40px; /* Adjust this value to position the icon correctly */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.send-button svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
