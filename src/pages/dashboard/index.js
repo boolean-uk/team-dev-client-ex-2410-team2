@@ -10,8 +10,7 @@ import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import NotificationPopup from '../../components/notificationPopup';
 import { transformUsernameToInitials } from '../../service/utils';
-
-import SearchList from '../../components/searchList/searchBarList';
+import SearchBarList from '../../components/searchList/searchBarList';
 import useAuth from '../../hooks/useAuth';
 
 import CohortList from '../../components/lists/cohortList/index';
@@ -127,7 +126,7 @@ const Dashboard = ({ isSearchPage, setIsSearchPage }) => {
         </Card>
 
         {isListVisible && (
-          <SearchList
+          <SearchBarList
             users={filteredUsers}
             isSearchPage={isSearchPage}
             setIsSearchPage={setIsSearchPage}
