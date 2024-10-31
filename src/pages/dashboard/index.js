@@ -15,7 +15,9 @@ const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    console.log('Fetching users...');
+    getUsers()
+      .then((data) => setUsers(data))
+      .catch((error) => console.error(error));
   }, []);
 
   const onChange = (e) => {

@@ -3,6 +3,10 @@ import './ShowListofUsers.css';
 import Button from '../button';
 
 const ShowListofUsers = ({ users }) => {
+  if (!users || users.length === 0) {
+    return 'loading...';
+  }
+
   const user = users[0];
   return (
     <>
