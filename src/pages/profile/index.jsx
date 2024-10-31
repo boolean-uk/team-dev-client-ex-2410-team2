@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
 import { useState, useEffect } from 'react';
 import StepOne from '../welcome/stepOne';
 import StepTwo from '../welcome/stepTwo';
@@ -15,7 +14,7 @@ import useModal from '../../hooks/useModal';
 import SaveProfileModal from '../../components/saveProfileModal';
 
 const Profile = () => {
-  const { onCreateProfile } = useAuth();
+  // const { onCreateProfile } = useAuth();
   const { id } = useParams();
   let user = {};
   const setUser = () => {
@@ -58,7 +57,7 @@ const Profile = () => {
     });
   };
 
-  const onComplete = () => {
+  /* const onComplete = () => {
     console.log(profile);
     onCreateProfile(
       profile.firstName,
@@ -71,11 +70,12 @@ const Profile = () => {
       profile.photo
     );
   };
+  */
 
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState(<NotificationPopup />);
   const [notificationVariant, setNotificationVariant] = useState('none');
-  const [notificationActionText, setNotificationActionText] = useState(null);
+  const [notificationActionText, setNotificationActionText] = useState('close');
 
   const { openModal, setModal, closeModal } = useModal();
 
@@ -90,7 +90,7 @@ const Profile = () => {
     console.log('Notification sent');
     setNotificationMessage(firstLetterToUpperCase(event.target.name) + ' is locked');
     setNotificationVariant('none');
-    setNotificationActionText(null);
+    setNotificationActionText('close');
     setShowNotification(true);
   };
 
