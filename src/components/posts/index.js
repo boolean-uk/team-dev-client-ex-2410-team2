@@ -2,18 +2,21 @@ import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import useAuth from '../../hooks/useAuth';
 import Post from '../post';
-import { getPosts } from '../../service/apiClient';
+import { getPosts, get } from '../../service/apiClient';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState(null);
   const { token } = useAuth();
   const userID = jwtDecode(token).userId;
-
-  console.log(userID);
 
   useEffect(() => {
     getPosts().then(setPosts);
   }, []);
+
+  useEffect(() => {
+    get(`users/${userID}`).then((res) => setUser(res.data.user));
+  }, [userID]);
 
   return (
     <>
@@ -27,7 +30,7 @@ const Posts = () => {
             comments={post.comments}
             /* post.author.id need to be changed to post.userId when post API is updated. */
             isLoggedIn={post.author.id === userID}
-            isTeacher={post.author.role === 'TEACHER'}
+            userRole={user?.role}
           />
         );
       })}

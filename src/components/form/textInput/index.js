@@ -13,6 +13,7 @@ const TextInput = ({
   type = 'text'
 }) => {
   const [input, setInput] = useState('');
+
   const [showpassword, setShowpassword] = useState(false);
 
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -92,6 +93,34 @@ const TextInput = ({
         <div className="lockicon-container">
           <LockIcon />
         </div>
+      </div>
+    );
+  } else if (type === 'search') {
+    return (
+      <div className="inputwrapper">
+        {label && (isHighlighted || value) && (
+          <label className="input-label" htmlFor={name}>
+            {label}
+          </label>
+        )}
+        <input
+          type={type}
+          name={name}
+          value={value}
+          placeholder={label}
+          onChange={onChange}
+          className={icon && 'input-has-icon'}
+          onFocus={(e) => {
+            e.target.placeholder = '';
+            setIsHighlighted(true);
+          }}
+          onBlur={(e) => {
+            e.target.placeholder = 'Search for people';
+            setIsHighlighted(false);
+          }}
+          autoFocus={focused}
+        />
+        {icon && <span className="input-icon">{icon}</span>}
       </div>
     );
   } else {

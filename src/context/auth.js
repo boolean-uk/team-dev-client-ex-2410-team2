@@ -64,6 +64,11 @@ const AuthProvider = ({ children }) => {
     navigate('/verification', { state: { email: email, password: password } });
   };
 
+  const handleLoggedInUserId = () => {
+    const { token } = useAuth();
+    return jwt_decode(token).userId;
+  };
+
   const handleCreateProfile = async (
     firstName,
     lastName,
@@ -88,7 +93,8 @@ const AuthProvider = ({ children }) => {
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
-    onCreateProfile: handleCreateProfile
+    onCreateProfile: handleCreateProfile,
+    getLoggedInUserId: handleLoggedInUserId
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
