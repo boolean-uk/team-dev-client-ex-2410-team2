@@ -1,4 +1,4 @@
-import UserListItemSpecialism from '../../userListComponents/userListItemSpecialism/UserListItemSpecialism';
+import SearchPageListItem from '../searchPageListItem';
 import './style.css';
 
 const SearchPageList = ({ users }) => {
@@ -9,7 +9,7 @@ const SearchPageList = ({ users }) => {
       </section>
       <section className="search-page-results-list">
         {users.map((user) => (
-          <UserListItemSpecialism user={user} key={user.id} />
+          <SearchPageListItem user={user} key={user.id} />
         ))}
       </section>
       <section className="search-page-noresults">

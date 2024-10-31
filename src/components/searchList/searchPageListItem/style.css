@@ -1,0 +1,26 @@
+.cohort-list-details {
+    display: flex;
+    margin-top: 0;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.cohort-list-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.cohort-list-specialism {
+    font-size: 16px;
+    margin: 0;
+    color: #64648C;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;   
+    margin: auto;
+    background-color: white;
+}
