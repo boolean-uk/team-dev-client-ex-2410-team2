@@ -13,7 +13,7 @@ const StepThree = ({ data, setData, setNotification }) => {
             <TextInput
               focused={true}
               onChange={setData}
-              value={'Student'}
+              value={data.role}
               name="role"
               label={'Role*'}
               type={'readOnly'}
@@ -22,7 +22,7 @@ const StepThree = ({ data, setData, setNotification }) => {
           <div onClick={setNotification}>
             <TextInput
               onChange={setData}
-              value={'Software Developer'}
+              value={data.specialism}
               name="specialism"
               label={'Specialism*'}
               type={'readOnly'}
@@ -31,7 +31,7 @@ const StepThree = ({ data, setData, setNotification }) => {
           <div onClick={setNotification}>
             <TextInput
               onChange={setData}
-              value={'Cohort 4'}
+              value={`Cohort ${data.cohortId}`}
               name="cohort"
               label={'Cohort*'}
               type={'readOnly'}
@@ -40,7 +40,7 @@ const StepThree = ({ data, setData, setNotification }) => {
           <div onClick={setNotification}>
             <TextInput
               onChange={setData}
-              value={'January 2023'}
+              value={data.startDate}
               name="startDate"
               label={'Start Date*'}
               type={'readOnly'}
@@ -49,7 +49,7 @@ const StepThree = ({ data, setData, setNotification }) => {
           <div onClick={setNotification}>
             <TextInput
               onChange={setData}
-              value={'June 2023'}
+              value={data.endDate}
               name="endDate"
               label={'End Date*'}
               type={'readOnly'}

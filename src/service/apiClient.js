@@ -12,15 +12,38 @@ async function register(email, password) {
   return response;
 }
 
-async function createProfile(userId, firstName, lastName, userName, githubUrl, bio, photo, mobile) {
+async function createProfile(
+  userId,
+  firstName,
+  lastName,
+  username,
+  githubUrl,
+  bio,
+  email,
+  mobile,
+  password,
+  profileImage,
+  cohortId,
+  startDate,
+  endDate,
+  role,
+  specialism
+) {
   return await patch(`users/${userId}`, {
     firstName,
     lastName,
-    userName,
+    username,
     githubUrl,
     bio,
-    photo,
-    mobile
+    email,
+    mobile,
+    password,
+    profileImage,
+    cohortId,
+    startDate,
+    endDate,
+    role,
+    specialism
   });
 }
 

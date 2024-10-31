@@ -15,7 +15,6 @@ const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
   const showModal = () => {
     setModal('Upload a photo', <UploadPhotoModal setPhotoData={setPhotoData} />);
     openModal();
-    console.log('Upload photo modal opened');
   };
 
   return (
@@ -27,19 +26,19 @@ const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
         <div className="welcome-form-profileimg">
           <p className="text-blue1">Photo</p>
           <div className="welcome-form-profileimg-input">
-            {data.photo ? (
+            {data.profileImage ? (
               <>
-                <img src={data.photo} className="welcome-form-profileimg-icon" />
+                <img src={data.profileImage} className="welcome-form-profileimg-icon" />
               </>
             ) : (
               <ProfileIcon colour="#28C846" background="#64DC78" />
             )}
             <div className="welcome-form-profileimg-selections">
               <p onClick={showModal} className="text-blue1">
-                {data.photo ? 'Change headshot' : 'Add headshot'}
+                {data.profileImage ? 'Change headshot' : 'Add headshot'}
               </p>
               <p onClick={() => setPhotoData('')} className="text-blue1">
-                {data.photo && 'Remove headshot'}
+                {data.profileImage && 'Remove headshot'}
               </p>
             </div>
           </div>
@@ -78,10 +77,10 @@ const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
             onChange={setData}
             value={data.githubUrl}
             name="githubUrl"
-            label={'Github Url*'}
+            label={'Github Username*'}
           />
           {validating && !data.githubUrl && (
-            <p className="welcome-form-error">Please enter a github url</p>
+            <p className="welcome-form-error">Please enter a github username</p>
           )}
           <p className="text-blue1">*Required</p>
         </div>

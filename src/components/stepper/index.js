@@ -25,7 +25,7 @@ const Stepper = ({ data, header, children, onComplete }) => {
   const onNextClick = () => {
     // Check 1. form
     if (currentStep === 0) {
-      if (data.firstName && data.lastName && data.userName && data.githubUsername) {
+      if (data.firstName && data.lastName && data.userName && data.githubUrl) {
         setValidate({ ...validate, step1: false });
         setCurrentStep(currentStep + 1);
       } else {
@@ -65,7 +65,7 @@ const Stepper = ({ data, header, children, onComplete }) => {
       <div className={currentStep > 0 ? 'stepper-buttons' : 'stepper-buttons-single'}>
         {currentStep > 0 && <Button text="Back" classes="offwhite" onClick={onBackClick} />}
         <Button
-          text={currentStep === children.length - 1 ? 'Submit' : 'Next'}
+          text={currentStep === children.length - 1 ? 'Create profile' : 'Next'}
           classes="blue"
           onClick={onNextClick}
         />
