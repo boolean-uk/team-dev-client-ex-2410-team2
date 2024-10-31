@@ -45,11 +45,13 @@ const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = fals
   const toggleComment = () => {
     setIsCommented((prevCommented) => !prevCommented);
   };
+
+  // This doenst handle anything with the backend. Comment functionality needs to be implemented first backend.
   const handleCommentSubmit = (event) => {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
 
     setPostComments((prevComments) => [...prevComments, newComment]);
-    setNewComment(''); // Clear the input after submitting
+    setNewComment('');
   };
 
   return (
@@ -91,6 +93,7 @@ const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = fals
         </section>
 
         <section>
+          {/* This is only for showing a hardcoded comment. <Comment> </Comment> needs to be removed, and hardcoded values needs to be removed from comments and replaced with dynamic values. */}
           <Comment></Comment>
           {comments.map((comment) =>
             isCommented ? (
@@ -105,6 +108,7 @@ const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = fals
             )
           )}
         </section>
+        {/* This doesnt handle anything with the backend. Comment functionality needs to be implemented first backend.  */}
         <section>
           <form className="comment-input" onSubmit={handleCommentSubmit}>
             <ProfileCircle initials={userInitials} />
