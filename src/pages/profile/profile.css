@@ -12,17 +12,29 @@
     /* Space between the header and the grid container */
 }
 
+.profile-titleblock{
+    display: grid;
+    grid-template-columns: 56px auto 48px;
+    column-gap: 20px;
+}
+
+.profile-name {
+    padding-top: 4px;
+}
+
+.profile-name p {
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     gap: 20px;
-    border: 1px solid #ccc;
     padding: 20px;
-    background-color: #f9f9f9;
     width: 100%;
     max-width: 800px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .grid-item {
