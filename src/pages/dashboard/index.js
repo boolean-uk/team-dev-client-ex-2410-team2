@@ -11,10 +11,7 @@ import useModal from '../../hooks/useModal';
 import NotificationPopup from '../../components/notificationPopup';
 import { transformUsernameToInitials } from '../../service/utils';
 
-import SearchList from '../../components/searchList';
-
-// import SearchBarList from '../../components/searchList/searchBarList';
-
+import SearchList from '../../components/searchList/searchBarList';
 import useAuth from '../../hooks/useAuth';
 
 import CohortList from '../../components/lists/cohortList/index';
