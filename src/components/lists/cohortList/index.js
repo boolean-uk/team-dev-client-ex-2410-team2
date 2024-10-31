@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getUsers } from '../../../service/apiClient';
-import UserListItem from '../../userListComponents/userListItem';
+import UserListItem from '../../listComponents/userListItem';
+
 import './style.css';
 
 const CohortList = () => {

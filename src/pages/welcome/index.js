@@ -99,6 +99,14 @@ const Welcome = () => {
           onAction={() => navigate(`/profile/${data.id}`)}
         />
       )}
+
+      {showSuccess && (
+        <NotificationPopup
+          message="Profile created"
+          actionText={'Edit'}
+          onAction={() => navigate(`/profile/${data.id}`)}
+        />
+      )}
     </main>
   );
 };
