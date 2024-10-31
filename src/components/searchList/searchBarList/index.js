@@ -2,7 +2,7 @@ import UserListItemSpecialism from '../../userListComponents/userListItemSpecial
 import './style.css';
 
 const SearchList = ({ users, setIsSearchPage, isSearchPage }) => {
-  const isExpanded = users.length > 10;
+  const isExpanded = users.length > 9;
   const isMinimized = users.length > 0 && users.length < 10;
 
   const handleSearchPage = () => {
@@ -22,7 +22,7 @@ const SearchList = ({ users, setIsSearchPage, isSearchPage }) => {
             .slice(0, isExpanded ? users.length : 3)
             .map((user) => <UserListItemSpecialism user={user} key={user.id} />)}
 
-        {users.length > 0 && <button onClick={handleSearchPage}>All results</button>}
+        {isExpanded && <button onClick={handleSearchPage}>All results</button>}
 
         {users.length === 0 && (
           <div className="search-list-no-results">
