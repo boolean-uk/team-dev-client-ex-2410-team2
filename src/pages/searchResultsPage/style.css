@@ -1,0 +1,17 @@
+.search-results-page {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-top: 20px; 
+}
+
+.search-page-header {
+    display: flex;
+    align-items: center;
+    margin: 20px 20px 20px 5px;
+}
+
+.search-page-header p {
+    margin-right: 20px;
+    cursor: pointer;
+}
