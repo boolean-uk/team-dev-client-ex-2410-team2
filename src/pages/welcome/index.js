@@ -28,7 +28,7 @@ const Welcome = () => {
     bio: '',
     userName: '',
     photo: '',
-    cohortId: data.cohort_id,
+    cohortId: data.cohortId,
     endDate: data.endDate,
     startDate: data.startDate,
     role: data.role,

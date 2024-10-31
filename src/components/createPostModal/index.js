@@ -1,37 +1,26 @@
 import { useState } from 'react';
-import { post } from '../../service/apiClient';
 import useModal from '../../hooks/useModal';
 import './style.css';
 import Button from '../button';
 
-const CreatePostModal = ({ setNotification }) => {
+const CreatePostModal = () => {
   // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
   const { closeModal } = useModal();
+
+  const [message, setMessage] = useState(null);
   const [text, setText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
     setText(e.target.value);
   };
 
-  const onSubmit = async () => {
-    try {
-      setIsLoading(true);
-      const response = await post('posts', { content: text });
+  const onSubmit = () => {
+    setMessage('Submit button was clicked! Closing modal in 2 seconds...');
 
-      if (response.status === 'fail') {
-        throw new Error(response.message || 'Failed to create post');
-      }
-
-      setTimeout(() => {
-        closeModal();
-        setNotification('Posted');
-      }, 2000);
-    } catch (error) {
-      setNotification(error.message);
-    } finally {
-      setIsLoading(false);
-    }
+    setTimeout(() => {
+      setMessage(null);
+      closeModal();
+    }, 2000);
   };
 
   return (
@@ -52,11 +41,13 @@ const CreatePostModal = ({ setNotification }) => {
       <section className="create-post-actions">
         <Button
           onClick={onSubmit}
-          text={isLoading ? 'Posting...' : 'Post'}
+          text="Post"
           classes={`${text.length ? 'blue' : 'offwhite'} width-full`}
           disabled={!text.length}
         />
       </section>
+
+      {message && <p>{message}</p>}
     </>
   );
 };

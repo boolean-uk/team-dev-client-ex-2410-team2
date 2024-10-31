@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { getUsers, get } from '../../service/apiClient';
 
 import SearchIcon from '../../assets/icons/searchIcon';
@@ -17,13 +17,14 @@ import CohortList from '../../components/lists/cohortList/index';
 
 import './style.css';
 
+export const UserContext = createContext();
+
 const Dashboard = ({ isSearchPage, setIsSearchPage }) => {
   const [searchVal, setSearchVal] = useState('');
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState(users);
   const [isListVisible, setIsListVisible] = useState(false);
   const [user, setUser] = useState(null);
-  const [notification, setNotification] = useState(null);
   const { getLoggedInUserId } = useAuth();
   const userId = getLoggedInUserId();
 
@@ -53,7 +54,7 @@ const Dashboard = ({ isSearchPage, setIsSearchPage }) => {
   // Create a function to run on user interaction
   const showModal = () => {
     // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreatePostModal setNotification={setNotification} />); // CreatePostModal is just a standard React component, nothing special
+    setModal('Create a post', <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
 
     // Open the modal!
     openModal();
@@ -87,54 +88,47 @@ const Dashboard = ({ isSearchPage, setIsSearchPage }) => {
 
   return (
     <>
-      <main>
-        <Card>
-          <div className="create-post-input">
-            <div className="profile-icon">
-              <p>{user && transformUsernameToInitials(`${user.firstName} ${user.lastName}`)}</p>
+      <UserContext.Provider value={{ user }}>
+        <main>
+          <Card>
+            <div className="create-post-input">
+              <div className="profile-icon">
+                <p>AJ</p>
+              </div>
+              <Button text="What's on your mind?" onClick={showModal} />
             </div>
-            <Button text="What's on your mind?" onClick={showModal} />
-          </div>
-        </Card>
-        <Posts />
-        <div className="notification-container">
-          {notification && (
-            <NotificationPopup
-              actionText="Edit"
-              message={notification}
-              className="delete-notification"
+          </Card>
+          <Posts />
+        </main>
+
+        <aside>
+          <Card>
+            <form
+              onClick={() => setIsListVisible(!isListVisible)}
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <TextInput
+                type="search"
+                icon={<SearchIcon />}
+                value={searchVal}
+                name="Search"
+                onChange={onChange}
+                placeholder="Search for people"
+              />
+            </form>
+          </Card>
+
+          {isListVisible && (
+            <SearchBarList
+              users={filteredUsers}
+              isSearchPage={isSearchPage}
+              setIsSearchPage={setIsSearchPage}
             />
           )}
-        </div>
-      </main>
 
-      <aside>
-        <Card>
-          <form
-            onClick={() => setIsListVisible(!isListVisible)}
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <TextInput
-              type="search"
-              icon={<SearchIcon />}
-              value={searchVal}
-              name="Search"
-              onChange={onChange}
-              placeholder="Search for people"
-            />
-          </form>
-        </Card>
-
-        {isListVisible && (
-          <SearchBarList
-            users={filteredUsers}
-            isSearchPage={isSearchPage}
-            setIsSearchPage={setIsSearchPage}
-          />
-        )}
-
-        {renderComponentBasedOnRole(user && user.role)}
-      </aside>
+          {renderComponentBasedOnRole(user && user.role)}
+        </aside>
+      </UserContext.Provider>
     </>
   );
 };

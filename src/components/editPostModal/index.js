@@ -1,49 +1,34 @@
 import { useState } from 'react';
-import { patch } from '../../service/apiClient';
 import useModal from '../../hooks/useModal';
 import './style.css';
 import Button from '../button';
-import { transformUsernameToInitials } from '../../service/utils';
 
-const EditPostModal = ({ username, postId, exisitingContent }) => {
+const EditPostModal = () => {
   const { closeModal } = useModal();
   const [message, setMessage] = useState(null);
-  const [text, setText] = useState(exisitingContent);
-  const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState('');
 
   const onChange = (e) => {
     setText(e.target.value);
   };
 
-  const onSubmit = async () => {
-    try {
-      setIsLoading(true);
-      const response = await patch(`posts/${postId}`, { content: text });
+  const onSubmit = () => {
+    setMessage('Submit button was clicked! Closing modal in 2 seconds...');
 
-      if (response.status === 'fail') {
-        throw new Error(response.message || 'Failed to update post');
-      }
-
-      setMessage('Post updated successfully!');
-      setTimeout(() => {
-        setMessage(null);
-        closeModal();
-      }, 2000);
-    } catch (error) {
-      setMessage('Error updating post: ' + error.message);
-    } finally {
-      setIsLoading(false);
-    }
+    setTimeout(() => {
+      setMessage(null);
+      closeModal();
+    }, 2000);
   };
 
   return (
     <>
       <section className="create-post-user-details">
         <div className="profile-icon">
-          <p>{transformUsernameToInitials(username)}</p>
+          <p>AJ</p>
         </div>
         <div className="post-user-name">
-          <p>{username}</p>
+          <p>Alex J</p>
         </div>
       </section>
 
@@ -54,7 +39,7 @@ const EditPostModal = ({ username, postId, exisitingContent }) => {
       <section className="create-post-actions">
         <Button
           onClick={onSubmit}
-          text={isLoading ? 'Posting...' : 'Post'}
+          text="Post"
           classes={`${text.length ? 'blue' : 'offwhite'} width-full`}
           disabled={!text.length}
         />

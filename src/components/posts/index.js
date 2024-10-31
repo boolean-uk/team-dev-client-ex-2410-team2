@@ -24,12 +24,12 @@ const Posts = () => {
         return (
           <Post
             key={post.id}
-            postId={post.id}
+            author={post.author}
             name={`${post.author.firstName} ${post.author.lastName}`}
             date={post.createdAt}
             content={post.content}
             comments={post.comments}
-            /* post.author.id need to be changed to post.userId when post API is updated. */
+            /* post.author.id need to be changed to post.userId when post API is updated.  */
             isLoggedIn={post.author.id === userID}
             userRole={user?.role}
           />

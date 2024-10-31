@@ -6,19 +6,11 @@ import ProfileIcon from '../../assets/icons/profileIcon';
 import CogIcon from '../../assets/icons/cogIcon';
 import LogoutIcon from '../../assets/icons/logoutIcon';
 import { NavLink } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { get } from '../../service/apiClient';
-import { transformUsernameToInitials } from '../../service/utils';
+import { useState } from 'react';
 
 const Header = () => {
-  const { token, onLogout, getLoggedInUserId } = useAuth();
+  const { token, onLogout } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [user, setUser] = useState(null);
-  const userId = getLoggedInUserId();
-
-  useEffect(() => {
-    get(`users/${userId}`).then((res) => setUser(res.data.user));
-  }, [getLoggedInUserId]);
 
   const onClickProfileIcon = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -33,7 +25,7 @@ const Header = () => {
       <FullLogo textColour="white" />
 
       <div className="profile-icon" onClick={onClickProfileIcon}>
-        <p>{user && transformUsernameToInitials(`${user.firstName} ${user.lastName}`)}</p>
+        <p>AJ</p>
       </div>
 
       {isMenuVisible && (

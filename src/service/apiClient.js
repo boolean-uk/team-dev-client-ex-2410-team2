@@ -69,10 +69,6 @@ async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth);
 }
 
-async function deletePost(endpoint, auth = true) {
-  return await request('DELETE', endpoint, null, auth);
-}
-
 async function request(method, endpoint, data, auth = true) {
   const opts = {
     headers: {
@@ -81,7 +77,7 @@ async function request(method, endpoint, data, auth = true) {
     method
   };
 
-  if (method.toUpperCase() === 'POST' || method.toUpperCase() === 'PATCH') {
+  if (method.toUpperCase() !== 'GET') {
     opts.body = JSON.stringify(data);
   }
 
@@ -95,4 +91,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, getUsers, get, post, patch, deletePost };
+export { login, getPosts, register, createProfile, getUsers, get };
