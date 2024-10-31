@@ -6,3 +6,24 @@
 .profile-circle-menu {
   margin-left: 65px;
 }
+.profile-icon-bigger {
+  width: 75px;
+  height: 75px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.profile-header {
+  margin: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  border-bottom: 0.1px solid rgb(228, 228, 228);
+}
+
+.profile-header-info {
+  display: flex;
+  flex-direction: column;
+}

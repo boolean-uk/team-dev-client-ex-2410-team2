@@ -9,7 +9,6 @@ aside {
 .create-post-input {
   display: grid;
   grid-template-columns: 70px auto;
-  align-items: center;
 }
 
 .create-post-input button {
@@ -19,21 +18,4 @@ aside {
   text-align: left !important;
   max-width: 100% !important;
   background-color: var(--color-blue5);
-}
-
-.modal-body>.modal-header {
-  align-items: center;
-}
-
-.modal-body > .modal-header > p {
-  background: #E6EBF5;
-  border-radius: 50%;
-  text-align: center;
-  padding: 5px 10px;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.modal-body>.modal-header>p:hover {
-  cursor: pointer;
-  background: #dfe4ec;
 }

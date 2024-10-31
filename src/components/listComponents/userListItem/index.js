@@ -13,6 +13,7 @@ const UserListItem = ({ user }) => {
   return (
     <section className="cohort-list-user" key={user.id}>
       <ProfileCircle
+        userData={user}
         initials={(user.firstName && user.firstName[0]) + (user.lastName && user.lastName[0])}
       />
       <div className="cohort-list-details">
