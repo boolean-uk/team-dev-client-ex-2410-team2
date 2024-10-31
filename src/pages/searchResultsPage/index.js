@@ -36,8 +36,6 @@ const SearchResultsPage = ({ isSearchPage, setIsSearchPage }) => {
   }, [searchVal, users]);
 
   const handlePrev = () => {
-    // Should implement function that takes you to previous
-    // alert('Should take you to previous page');
     setIsSearchPage(false);
     navigate('/dashboard');
   };
