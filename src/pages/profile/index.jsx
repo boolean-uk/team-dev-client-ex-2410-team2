@@ -7,12 +7,13 @@ import StepThree from '../welcome/stepThree';
 import StepFour from '../welcome/stepFour';
 import './profile.css'; // Import the CSS file
 import Card from '../../components/card';
-import ProfileCircle from '../../components/profileCircle';
+// import ProfileCircle from '../../components/profileCircle';
 import { get } from '../../service/apiClient';
 import NotificationPopup from '../../components/notificationPopup';
 import useModal from '../../hooks/useModal';
 import SaveProfileModal from '../../components/saveProfileModal';
 import Button from '../../components/button';
+import ProfileCircle from '../../components/profileCircle';
 
 const Profile = () => {
   const { onCreateProfile } = useAuth();

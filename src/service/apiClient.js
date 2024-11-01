@@ -95,4 +95,20 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, getUsers, get, post, patch, deletePost };
+async function createComment(content, postId, userId) {
+  const response = await post('comments', { content, postId, userId }, true);
+  return response;
+}
+
+export {
+  login,
+  getPosts,
+  register,
+  createProfile,
+  getUsers,
+  get,
+  post,
+  patch,
+  deletePost,
+  createComment
+};
