@@ -27,3 +27,7 @@ nav svg {
 nav p {
   line-height: 24px;
 }
+
+.active {
+  background-color: #E6EBF5;
+}

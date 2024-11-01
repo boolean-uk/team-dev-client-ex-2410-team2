@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 import CohortIcon from '../../assets/icons/cohortIcon';
 import HomeIcon from '../../assets/icons/homeIcon';
 import ProfileIcon from '../../assets/icons/profileIcon';
@@ -7,6 +8,7 @@ import './style.css';
 
 const Navigation = () => {
   const { token } = useAuth();
+  const [activeNav, setActiveNav] = useState('home');
 
   if (!token) {
     return null;
@@ -15,20 +17,20 @@ const Navigation = () => {
   return (
     <nav>
       <ul>
-        <li>
-          <NavLink to="/">
+        <li className={activeNav === 'home' ? 'active' : ''}>
+          <NavLink to="/" onClick={() => setActiveNav('home')}>
             <HomeIcon colour="#000046" />
             <p>Home</p>
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/">
+        <li className={activeNav === 'profile' ? 'active' : ''}>
+          <NavLink to="/profile" onClick={() => setActiveNav('profile')}>
             <ProfileIcon />
             <p>Profile</p>
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/cohort">
+        <li className={activeNav === 'cohort' ? 'active' : ''}>
+          <NavLink to="/cohort" onClick={() => setActiveNav('cohort')}>
             <CohortIcon />
             <p>Cohort</p>
           </NavLink>
