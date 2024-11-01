@@ -3,9 +3,9 @@ import { post } from '../../service/apiClient';
 import useModal from '../../hooks/useModal';
 import './style.css';
 import Button from '../button';
+import { transformUsernameToInitials } from '../../service/utils';
 
-const CreatePostModal = ({ setNotification }) => {
-  // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
+const CreatePostModal = ({ setNotification, user }) => {
   const { closeModal } = useModal();
   const [text, setText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -34,14 +34,18 @@ const CreatePostModal = ({ setNotification }) => {
     }
   };
 
+  // Extract user's full name and initials
+  const fullName = `${user.firstName} ${user.lastName}`;
+  const userInitials = transformUsernameToInitials(fullName);
+
   return (
     <>
       <section className="create-post-user-details">
         <div className="profile-icon">
-          <p>AJ</p>
+          <p>{userInitials}</p>
         </div>
         <div className="post-user-name">
-          <p>Alex J</p>
+          <p>{fullName}</p>
         </div>
       </section>
 

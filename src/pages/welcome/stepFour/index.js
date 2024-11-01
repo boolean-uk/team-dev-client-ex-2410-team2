@@ -1,9 +1,11 @@
 import Form from '../../../components/form';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const StepFour = ({ data, setData }) => {
   const [characterCount, setCharacterCount] = useState(0);
-
+  const location = useLocation();
+  const focus = location.pathname === '/welcome';
   data.bio = data.bio || '';
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const StepFour = ({ data, setData }) => {
       <Form className="welcome-form">
         <div className="welcome-form-inputs-bio">
           <textarea
-            autoFocus={true}
+            autoFocus={focus}
             name="bio"
             value={data.bio}
             onChange={handleChange}

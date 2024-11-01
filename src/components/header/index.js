@@ -53,7 +53,7 @@ const Header = () => {
             <section className="user-panel-options border-top">
               <ul>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to={`/profile/${userId}`}>
                     <ProfileIcon /> <p>Profile</p>
                   </NavLink>
                 </li>

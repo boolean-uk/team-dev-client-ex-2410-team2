@@ -25,7 +25,7 @@ const Stepper = ({ data, header, children, onComplete }) => {
   const onNextClick = () => {
     // Check 1. form
     if (currentStep === 0) {
-      if (data.firstName && data.lastName && data.userName && data.githubUrl) {
+      if (data.firstName && data.lastName && data.username && data.githubUrl) {
         setValidate({ ...validate, step1: false });
         setCurrentStep(currentStep + 1);
       } else {

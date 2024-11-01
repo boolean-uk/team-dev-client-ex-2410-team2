@@ -1,0 +1,63 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    margin-left: 20px;
+    /* Adjust this value to add margin from the navigation bar */
+}
+
+.profile-header {
+    margin-bottom: 20px;
+    /* Space between the header and the grid container */
+}
+
+.profile-titleblock{
+    display: grid;
+    grid-template-columns: 56px auto 48px;
+    column-gap: 20px;
+}
+
+.profile-name {
+    padding-top: 4px;
+}
+
+.profile-name-tag {
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+
+.profile-specialism-tag {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.grid-item {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.grid-buttons button {
+    margin-right: 10px;
+}

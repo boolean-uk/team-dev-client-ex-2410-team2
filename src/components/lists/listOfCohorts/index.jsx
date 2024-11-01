@@ -24,4 +24,4 @@ const ListOfCohorts = () => {
   );
 };
 
-export default ListOfCohorts;
+export default { ListOfCohorts };

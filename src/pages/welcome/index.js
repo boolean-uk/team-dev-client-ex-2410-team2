@@ -26,7 +26,7 @@ const Welcome = () => {
     mobile: '',
     password: data.password,
     bio: '',
-    userName: '',
+    username: '',
     photo: '',
     cohortId: data.cohort_id,
     endDate: data.endDate,
@@ -55,7 +55,7 @@ const Welcome = () => {
     const res = await onCreateProfile(
       profile.firstName,
       profile.lastName,
-      profile.userName,
+      profile.username,
       profile.githubUrl,
       profile.bio,
       profile.email,

@@ -13,7 +13,7 @@ import { UserContext } from '../../pages/dashboard';
 
 const ProfileCircle = ({ userData, initials }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const { user } = useContext(UserContext);
+  const user = useContext(UserContext);
   return (
     <div className="profile-circle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
       {isMenuVisible && (

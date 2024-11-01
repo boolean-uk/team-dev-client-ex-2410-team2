@@ -1,0 +1,33 @@
+.cohort {
+    display: grid;
+    row-gap: 20px;
+}
+
+.cohort-header p {
+    margin-top: 10px;
+    color: #64648C;
+}
+
+.cohort-list-user {
+    display: grid;
+    grid-template-columns: 56px auto 48px;
+    column-gap: 20px;
+    margin: 15px 0;
+}
+
+.cohort-list-details {
+    margin-top: 15px;
+}
+
+.edit-icon {
+    margin-top: 5px;
+}
+
+.edit-icon p {
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.edit-icon p:hover {
+    cursor: pointer;
+}

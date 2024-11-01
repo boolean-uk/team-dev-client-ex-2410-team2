@@ -18,10 +18,9 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.state?.from?.pathname || '/');
+      navigate(location.state?.from?.pathname || location); // This is probably the intended way of doing this.
     }
   }, [location.state?.from?.pathname, navigate]);
 

@@ -18,6 +18,7 @@ import useAuth from '../../hooks/useAuth';
 import CohortList from '../../components/lists/cohortList/index';
 
 import './style.css';
+import ShowListofUsers from '../../components/showListOfUsers/ShowListOfUsers';
 
 export const UserContext = createContext();
 
@@ -25,6 +26,7 @@ const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState(users);
+  // eslint-disable-next-line no-unused-vars
   const [isListVisible, setIsListVisible] = useState(false);
   const [user, setUser] = useState(null);
   const [notification, setNotification] = useState(null);
@@ -57,7 +59,7 @@ const Dashboard = () => {
   // Create a function to run on user interaction
   const showModal = () => {
     // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreatePostModal setNotification={setNotification} />); // CreatePostModal is just a standard React component, nothing special
+    setModal('Create a post', <CreatePostModal setNotification={setNotification} user={user} />); // CreatePostModal is just a standard React component, nothing special
 
     // Open the modal!
     openModal();
@@ -66,16 +68,22 @@ const Dashboard = () => {
   const renderComponentBasedOnRole = (role) => {
     switch (role) {
       case 'TEACHER': {
+        const teachers = users.filter((user) => user.role === 'TEACHER');
+        const students = users.filter((user) => user.role === 'STUDENT');
         // TODO: Add the correct sidebar items for teachers when component is ready.
-        const teacherSidebarItems = ['Cohorts', 'Students', 'Teachers'];
-        return (
-          <>
-            {teacherSidebarItems.map((item) => (
+        // const teacherSidebarItems = ['Cohorts', 'Students', 'Teachers'];
+        /*
+        {teacherSidebarItems.map((item) => (
               <Card key={item}>
                 <h4>{item}</h4>
               </Card>
             ))}
-          </>
+              */
+        return (
+          <Card>
+            <ShowListofUsers users={students}></ShowListofUsers>
+            <ShowListofUsers users={teachers}></ShowListofUsers>
+          </Card>
         );
       }
       case 'STUDENT':
@@ -91,7 +99,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <UserContext.Provider value={{ user }}>
+      <UserContext.Provider value={user}>
         <main>
           <Card>
             <div className="create-post-input">

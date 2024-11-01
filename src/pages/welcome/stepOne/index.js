@@ -4,10 +4,12 @@ import TextInput from '../../../components/form/textInput';
 import UploadPhotoModal from '../../../components/uploadPhotoModal';
 import useModal from '../../../hooks/useModal';
 import './style.css';
+import { useLocation } from 'react-router-dom';
 
 const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
   const { openModal, setModal } = useModal();
-
+  const location = useLocation();
+  const focus = location.pathname === '/welcome';
   const setPhotoData = (photoData) => {
     setPhoto(photoData);
   };
@@ -46,7 +48,7 @@ const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
         </div>
         <div className="welcome-form-inputs">
           <TextInput
-            focused={true}
+            focused={focus}
             onChange={setData}
             value={data.firstName}
             name="firstName"
@@ -66,21 +68,21 @@ const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
           )}
           <TextInput
             onChange={setData}
-            value={data.userName}
-            name="userName"
+            value={data.username}
+            name="username"
             label={'User name*'}
           />
-          {validating && !data.userName && (
+          {validating && !data.username && (
             <p className="welcome-form-error">Please enter a user name</p>
           )}
           <TextInput
             onChange={setData}
             value={data.githubUrl}
             name="githubUrl"
-            label={'Github Username*'}
+            label={'Github Url*'}
           />
           {validating && !data.githubUrl && (
-            <p className="welcome-form-error">Please enter a github username</p>
+            <p className="welcome-form-error">Please enter a github url</p>
           )}
           <p className="text-blue1">*Required</p>
         </div>

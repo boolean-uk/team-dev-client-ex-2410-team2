@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import useModal from '../../hooks/useModal';
 import Card from '../card';
-import Comment from '../comment';
 import DeletePostModal from '../deletePostModal';
 import EditDecisionModal from '../editDecisionModal';
 import EditPostModal from '../editPostModal';
@@ -36,16 +35,17 @@ const Post = ({
   const [postComments, setPostComments] = useState(comments);
   const [showAllComments, setShowAllComments] = useState(false);
   const [toggleShowAllComments, setToggleShowAllComments] = useState(false);
+  const [notification, setNotification] = useState(null);
 
   const userInitials = transformUsernameToInitials(name);
-  const [notification, setNotification] = useState(null);
-  const modalsMap = {
-    'Edit post': <EditPostModal username={name} postId={postId} exisitingContent={content} />,
-    'Delete post?': <DeletePostModal postId={postId} setNotification={setNotification} />
-  };
   const canEditPost = isLoggedIn || userRole === 'TEACHER';
   const modalRef = useRef(null);
   const buttonRef = useRef(null);
+
+  const modalsMap = {
+    'Edit post': <EditPostModal username={name} postId={postId} existingContent={content} />,
+    'Delete post?': <DeletePostModal postId={postId} setNotification={setNotification} />
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -131,7 +131,11 @@ const Post = ({
           <p>{content}</p>
         </section>
 
-        <section className="post-interactions-container">
+        <section
+          className={`post-interactions-container border-top ${
+            comments.length ? 'border-bottom' : ''
+          }`}
+        >
           <div className="post-interactions">
             <div onClick={toggleLike}>
               {isLiked ? <FilledHeartIcon /> : <UnfilledHeartIcon />}
@@ -195,6 +199,15 @@ const Post = ({
           </section>
         </form>
       </article>
+      <div className="notification-container">
+        {notification && (
+          <NotificationPopup
+            actionText="Undo"
+            message={notification}
+            className="delete-notification"
+          />
+        )}
+      </div>
     </Card>
   );
 };

@@ -5,10 +5,10 @@ import './style.css';
 import Button from '../button';
 import { transformUsernameToInitials } from '../../service/utils';
 
-const EditPostModal = ({ username, postId, exisitingContent }) => {
+const EditPostModal = ({ username, postId, existingContent }) => {
   const { closeModal } = useModal();
   const [message, setMessage] = useState(null);
-  const [text, setText] = useState(exisitingContent);
+  const [text, setText] = useState(existingContent);
   const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
