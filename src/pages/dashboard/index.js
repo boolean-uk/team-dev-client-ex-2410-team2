@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { getUsers, get } from '../../service/apiClient';
 
 import SearchIcon from '../../assets/icons/searchIcon';
@@ -18,6 +19,8 @@ import useAuth from '../../hooks/useAuth';
 import CohortList from '../../components/lists/cohortList/index';
 
 import './style.css';
+
+export const UserContext = createContext();
 
 export const UserContext = createContext();
 
