@@ -7,6 +7,7 @@
   display: grid;
   grid-template-columns: 56px auto 48px;
   column-gap: 20px;
+  position: relative;
 }
 
 .post-user-name {
@@ -27,6 +28,12 @@
   width: 40px;
   height: 40px;
   background: #f0f5fa;
+  transition: 0.2s ease-in-out;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+  background: #e3e8ec;
 }
 
 .edit-icon p {
@@ -45,6 +52,92 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.post-interactions div {
+  display: flex;
+  align-items: center;
+}
+
 .post-interactions-container p {
   text-align: right;
+}
+
+.notification-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: fit-content;
+}
+
+.delete-notification {
+  animation: slideUpFade 3s ease-in-out forwards;
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+.post-interactions .like {
+  margin-left: 8px;
+}
+
+.new-comment-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.new-comment-input {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.comment-field {
+  background: #e6ebf5;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 40px 12px 12px;
+  width: 100%;
+  font-size: 16px;
+  font-family: 'Lexend', sans-serif;
+  color: #64648c;
+  box-sizing: border-box;
+}
+
+.comment-field::placeholder {
+  color: #64648c;
+}
+
+.post-icon-wrapper {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.post-icon-wrapper svg {
+  width: 32px;
+  height: 32px;
+  fill: #000046;
 }

@@ -7,7 +7,9 @@
   grid-template-columns: 151px 2fr 1fr;
   grid-template-rows: 96px auto;
   background-color: #f0f5fa;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
 }
 
 .ReactModal__Body--open,

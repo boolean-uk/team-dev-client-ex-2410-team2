@@ -61,26 +61,65 @@ const AuthProvider = ({ children }) => {
     }
 
     setToken(res.data.token);
-    navigate('/verification', { state: { email, password } });
+    navigate('/verification', {
+      state: {
+        ...res.data.user,
+        email: email,
+        password: password
+      }
+    });
+  };
+
+  const handleLoggedInUserId = () => {
+    const { token } = useAuth();
+    return jwt_decode(token).userId;
   };
 
   const handleCreateProfile = async (
     firstName,
     lastName,
-    userName,
+    username,
     githubUrl,
     bio,
     email,
     mobile,
     password,
-    photo
+    profileImage,
+    cohortId,
+    startDate,
+    endDate,
+    role,
+    specialism
   ) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, userName, githubUrl, bio, photo, mobile);
-
     localStorage.setItem('token', token);
-    navigate('/');
+
+    const response = await createProfile(
+      userId,
+      firstName,
+      lastName,
+      username,
+      githubUrl,
+      bio,
+      email,
+      mobile,
+      password,
+      profileImage,
+      cohortId,
+      startDate,
+      endDate,
+      role,
+      specialism
+    );
+    if (response.status === 'success') {
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+      return 'success';
+    } else {
+      return 'fail';
+    }
   };
 
   const value = {
@@ -88,7 +127,8 @@ const AuthProvider = ({ children }) => {
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
-    onCreateProfile: handleCreateProfile
+    onCreateProfile: handleCreateProfile,
+    getLoggedInUserId: handleLoggedInUserId
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

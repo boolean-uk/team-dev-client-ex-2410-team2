@@ -1,0 +1,29 @@
+.delete-post-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0.8rem 0;
+}
+
+.delete-post-text {
+    color: #64648C;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn {
+    background: #F0F5FA;
+}
+
+.active-btn {
+    background: #000046;
+    color: #fff;
+}
+
+.modal-header h2 {
+    font-size: 28px;
+}

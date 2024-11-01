@@ -16,12 +16,21 @@ const UploadPhotoModal = ({ setPhotoData }) => {
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setPhotoData(e.target.result);
-        closeModal();
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+          const compressed = canvas.toDataURL('image/jpeg', 0.5);
+          setPhotoData(compressed);
+          closeModal();
+        };
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
-    } else {
-      console.error('Please select an image file.');
     }
   };
 

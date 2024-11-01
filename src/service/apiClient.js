@@ -12,15 +12,38 @@ async function register(email, password) {
   return response;
 }
 
-async function createProfile(userId, firstName, lastName, userName, githubUrl, bio, photo, mobile) {
+async function createProfile(
+  userId,
+  firstName,
+  lastName,
+  username,
+  githubUrl,
+  bio,
+  email,
+  mobile,
+  password,
+  profileImage,
+  cohortId,
+  startDate,
+  endDate,
+  role,
+  specialism
+) {
   return await patch(`users/${userId}`, {
     firstName,
     lastName,
-    userName,
+    username,
     githubUrl,
     bio,
-    photo,
-    mobile
+    email,
+    mobile,
+    password,
+    profileImage,
+    cohortId,
+    startDate,
+    endDate,
+    role,
+    specialism
   });
 }
 
@@ -46,6 +69,10 @@ async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth);
 }
 
+async function deletePost(endpoint, auth = true) {
+  return await request('DELETE', endpoint, null, auth);
+}
+
 async function request(method, endpoint, data, auth = true) {
   const opts = {
     headers: {
@@ -54,7 +81,7 @@ async function request(method, endpoint, data, auth = true) {
     method
   };
 
-  if (method.toUpperCase() !== 'GET') {
+  if (method.toUpperCase() === 'POST' || method.toUpperCase() === 'PATCH') {
     opts.body = JSON.stringify(data);
   }
 
@@ -68,4 +95,20 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, getUsers };
+async function createComment(content, postId, userId) {
+  const response = await post('comments', { content, postId, userId }, true);
+  return response;
+}
+
+export {
+  login,
+  getPosts,
+  register,
+  createProfile,
+  getUsers,
+  get,
+  post,
+  patch,
+  deletePost,
+  createComment
+};
