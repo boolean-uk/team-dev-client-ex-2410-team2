@@ -33,6 +33,7 @@ const Posts = () => {
             /* post.author.id need to be changed to post.userId when post API is updated.  */
             isLoggedIn={post.author.id === userID}
             userRole={user?.role}
+            userID={userID}
           />
         );
       })}

@@ -99,10 +99,9 @@
   margin-left: 8px;
 }
 
-/* Specific styles for the new comment input field */
 .new-comment-container {
   display: flex;
-  align-items: center; /* Center vertically with profile icon */
+  align-items: center;
   margin-bottom: 10px;
 }
 
@@ -110,14 +109,14 @@
   flex: 1;
   position: relative;
   display: flex;
-  align-items: center; /* Center the input with the profile icon */
+  align-items: center;
 }
 
 .comment-field {
   background: #e6ebf5;
   border: none;
   border-radius: 8px;
-  padding: 12px 40px 12px 12px; /* Padding for icon */
+  padding: 12px 40px 12px 12px;
   width: 100%;
   font-size: 16px;
   font-family: 'Lexend', sans-serif;
@@ -129,7 +128,6 @@
   color: #64648c;
 }
 
-/* Styling for the post icon */
 .post-icon-wrapper {
   position: absolute;
   right: 12px;

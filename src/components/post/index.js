@@ -14,6 +14,7 @@ import FilledCommentIcon from '../../assets/icons/filledCommentIcon';
 import UnfilledHeartIcon from '../../assets/icons/unfilledHeartIcon';
 import UnfilledCommentIcon from '../../assets/icons/unfilledCommentIcon';
 import PostIcon from '../../assets/icons/postIcon';
+import { createComment } from '../../service/apiClient';
 
 const Post = ({
   postId,
@@ -23,7 +24,9 @@ const Post = ({
   comments = [],
   likes = 0,
   isLoggedIn = false,
-  userRole
+  userRole,
+  author,
+  userID
 }) => {
   const { openModal, setModal } = useModal();
   const [menuOptionOpen, setMenuOptionOpen] = useState(false);
@@ -31,6 +34,8 @@ const Post = ({
   const [isCommented, setIsCommented] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [postComments, setPostComments] = useState(comments);
+  const [showAllComments, setShowAllComments] = useState(false);
+  const [toggleShowAllComments, setToggleShowAllComments] = useState(false);
 
   const userInitials = transformUsernameToInitials(name);
   const [notification, setNotification] = useState(null);
@@ -74,103 +79,123 @@ const Post = ({
 
   const toggleComment = () => {
     setIsCommented((prevCommented) => !prevCommented);
+    setToggleShowAllComments((prev) => !prev);
+    setShowAllComments(false); // Reset to showing only the first few comments initially
   };
 
-  // This doenst handle anything with the backend. Comment functionality needs to be implemented first backend.
   const handleCommentSubmit = (event) => {
     event.preventDefault();
+    createComment(newComment, postId, userID);
 
-    setPostComments((prevComments) => [...prevComments, newComment]);
+    setPostComments((prevComments) => [
+      ...prevComments,
+      {
+        content: newComment,
+        postId: postId,
+        userId: userID
+      }
+    ]);
     setNewComment('');
   };
+
+  // Show either all comments or just the last 3 based on the state
+  const displayedComments = showAllComments ? postComments : postComments.slice(-3);
 
   return (
     <Card>
       <article className="post">
         <section className="post-details">
-          <ProfileCircle userData={author} initials={userInitials} />
-
-            <div className="post-user-name">
-              <p>{name}</p>
-              <small>{formatDate(date).replace(',', '')}</small>
-            </div>
-            {canEditPost && (
-              <div className="edit-icon" ref={buttonRef} onClick={openMenuOptions}>
-                <p>...</p>
-                {menuOptionOpen && (
-                  <div ref={modalRef}>
-                    <EditDecisionModal
-                      onClick={handleDecisionClick}
-                      onClose={() => setMenuOptionOpen(false)}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-          </section>
-          <section className="post-content">
-            <p>{content}</p>
-          </section>
-
-          <section
-            className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}
-          >
-            <div className="post-interactions">
-              <div onClick={toggleLike}>
-                {isLiked ? <FilledHeartIcon /> : <UnfilledHeartIcon />}
-                <span className="like">Like</span>
-              </div>
-              <div onClick={toggleComment}>
-                {isCommented ? <FilledCommentIcon /> : <UnfilledCommentIcon />}
-                <span>Comment</span>
-              </div>
-            </div>
-
-            <p>{!likes && 'Be the first to like this'}</p>
-          </section>
-
-          <section>
-            {/* This is only for showing a hardcoded comment. <Comment> </Comment> needs to be removed, and hardcoded values needs to be removed from comments and replaced with dynamic values. */}
-            <Comment></Comment>
-            {comments.map((comment) =>
-              isCommented ? (
-                <Comment
-                  key={comment.id}
-                  name={comment.name}
-                  userInitials={userInitials}
-                  content={comment.content}
-                />
-              ) : (
-                <></>
-              )
-            )}
-          </section>
-          {/* This doesnt handle anything with the backend. Comment functionality needs to be implemented first backend.  */}
-          <article className="post">
-            <form onSubmit={handleCommentSubmit}>
-              <section className="comment-wrapper new-comment-container">
-                <div className="profile-circle-container">
-                  <ProfileCircle initials={userInitials} />
-                </div>
-                <div className="comment-container new-comment-input">
-                  <input
-                    type="text"
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
-                    placeholder="Add a comment..."
-                    className="comment-field"
-                    required
+          <div className="profile-circle-container">
+            <ProfileCircle userData={author} initials={userInitials} />
+          </div>
+          <div className="post-user-name">
+            <p>{name}</p>
+            <small>{formatDate(date).replace(',', '')}</small>
+          </div>
+          {canEditPost && (
+            <div className="edit-icon" ref={buttonRef} onClick={openMenuOptions}>
+              <p>...</p>
+              {menuOptionOpen && (
+                <div ref={modalRef}>
+                  <EditDecisionModal
+                    onClick={handleDecisionClick}
+                    onClose={() => setMenuOptionOpen(false)}
                   />
-                  <div className="post-icon-wrapper">
-                    <PostIcon />
+                </div>
+              )}
+            </div>
+          )}
+        </section>
+
+        <section className="post-content">
+          <p>{content}</p>
+        </section>
+
+        <section className="post-interactions-container">
+          <div className="post-interactions">
+            <div onClick={toggleLike}>
+              {isLiked ? <FilledHeartIcon /> : <UnfilledHeartIcon />}
+              <span className="like">Like</span>
+            </div>
+            <div onClick={toggleComment}>
+              {isCommented ? <FilledCommentIcon /> : <UnfilledCommentIcon />}
+              <span>Comment</span>
+            </div>
+          </div>
+          <p>{!likes && 'Be the first to like this'}</p>
+        </section>
+
+        {toggleShowAllComments && (
+          <>
+            {postComments.length > 3 && !showAllComments && (
+              <div className="see-comments-button" onClick={() => setShowAllComments(true)}>
+                See previous comments
+              </div>
+            )}
+            {showAllComments && (
+              <div className="see-comments-button" onClick={() => setShowAllComments(false)}>
+                Show less
+              </div>
+            )}
+
+            <section>
+              {displayedComments.map((comment, index) => (
+                <div className="comment-wrapper" key={index}>
+                  <div className="profile-circle">
+                    <ProfileCircle userData={comment.author} initials={userInitials} />
+                  </div>
+                  <div className="comment-container">
+                    <p>{comment.content}</p>
                   </div>
                 </div>
-              </section>
-            </form>
-          </article>
-        </article>
-      </Card>
-    </>
+              ))}
+            </section>
+          </>
+        )}
+
+        {/* The comment input section is always displayed */}
+        <form onSubmit={handleCommentSubmit}>
+          <section className="comment-wrapper new-comment-container">
+            <div className="profile-circle-container">
+              <ProfileCircle userData={author} initials={userInitials} />
+            </div>
+            <div className="new-comment-input">
+              <input
+                type="text"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Add a comment..."
+                className="comment-field"
+                required
+              />
+              <div onClick={handleCommentSubmit} className="post-icon-wrapper">
+                <PostIcon />
+              </div>
+            </div>
+          </section>
+        </form>
+      </article>
+    </Card>
   );
 };
 
