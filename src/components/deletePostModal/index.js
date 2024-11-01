@@ -67,8 +67,6 @@ const DeletePostModal = ({ postId, setNotification }) => {
   const [activeBtn, setActiveBtn] = useState('Cancel');
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(`Post ID: ${postId}`);
-
   const handleDelete = async () => {
     try {
       setIsLoading(true);
