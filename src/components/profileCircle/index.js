@@ -10,14 +10,14 @@ import Menu from '../menu';
 import MenuItem from '../menu/menuItem';
 import './style.css';
 
-const ProfileCircle = ({ initials }) => {
+const ProfileCircle = ({ initials, colorCode }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   return (
     <div className="profile-circle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
       {isMenuVisible && <CascadingMenu />}
 
-      <div className="profile-icon">
+      <div style={{ backgroundColor: `${colorCode}` }} className="profile-icon">
         <p>{initials}</p>
       </div>
     </div>
