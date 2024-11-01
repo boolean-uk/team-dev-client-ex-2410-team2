@@ -116,12 +116,17 @@ const Dashboard = () => {
 
         <aside>
           <Card>
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form
+              onClick={() => setIsListVisible(!isListVisible)}
+              onSubmit={(e) => e.preventDefault()}
+            >
               <TextInput
+                type="search"
                 icon={<SearchIcon />}
                 value={searchVal}
                 name="Search"
                 onChange={onChange}
+                placeholder="Search for people"
               />
             </form>
           </Card>
