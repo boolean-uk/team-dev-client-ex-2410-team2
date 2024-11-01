@@ -64,9 +64,7 @@ const AuthProvider = ({ children }) => {
     navigate('/verification', {
       state: {
         ...res.data.user,
-        // eslint-disable-next-line object-shorthand
         email: email,
-        // eslint-disable-next-line object-shorthand
         password: password
       }
     });
