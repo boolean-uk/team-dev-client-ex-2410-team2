@@ -91,6 +91,7 @@ const Post = ({
       ...prevComments,
       {
         content: newComment,
+        // eslint-disable-next-line object-shorthand
         postId: postId,
         userId: userID
       }

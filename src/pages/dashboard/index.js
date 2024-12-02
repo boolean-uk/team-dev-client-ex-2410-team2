@@ -1,6 +1,10 @@
+<<<<<<< HEAD
+import { useState, useEffect } from 'react';
+=======
 import { useState, useEffect, createContext } from 'react';
 import { getUsers, get } from '../../service/apiClient';
 
+>>>>>>> main
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -8,6 +12,10 @@ import CreatePostModal from '../../components/createPostModal';
 import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
+<<<<<<< HEAD
+import ShowListofUsers from '../../components/showListofUsers/ShowListofUsers';
+import { getUsers } from '../../service/apiClient';
+=======
 import NotificationPopup from '../../components/notificationPopup';
 import { transformUsernameToInitials } from '../../service/utils';
 
@@ -16,6 +24,7 @@ import SearchList from '../../components/searchList';
 import useAuth from '../../hooks/useAuth';
 
 import CohortList from '../../components/lists/cohortList/index';
+>>>>>>> main
 
 import './style.css';
 import ShowListofUsers from '../../components/showListOfUsers/ShowListOfUsers';
@@ -25,6 +34,13 @@ export const UserContext = createContext();
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
   const [users, setUsers] = useState([]);
+<<<<<<< HEAD
+  useEffect(() => {
+    getUsers()
+      .then((data) => setUsers(data))
+      .catch((error) => console.error(error));
+  }, []);
+=======
   const [filteredUsers, setFilteredUsers] = useState(users);
   // eslint-disable-next-line no-unused-vars
   const [isListVisible, setIsListVisible] = useState(false);
@@ -48,6 +64,7 @@ const Dashboard = () => {
   useEffect(() => {
     get(`users/${userId}`).then((response) => setUser(response.data.user));
   }, [userId]);
+>>>>>>> main
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -55,6 +72,9 @@ const Dashboard = () => {
 
   // Use the useModal hook to get the openModal and setModal functions
   const { openModal, setModal } = useModal();
+
+  const teachers = users.filter((user) => user.role === 'TEACHER');
+  const students = users.filter((user) => user.role === 'STUDENT');
 
   // Create a function to run on user interaction
   const showModal = () => {
@@ -140,9 +160,17 @@ const Dashboard = () => {
 
           {isListVisible && <SearchList users={filteredUsers} />}
 
+<<<<<<< HEAD
+        <Card>
+          <ShowListofUsers users={students}></ShowListofUsers>
+          <ShowListofUsers users={teachers}></ShowListofUsers>
+        </Card>
+      </aside>
+=======
           {renderComponentBasedOnRole(user && user.role)}
         </aside>
       </UserContext.Provider>
+>>>>>>> main
     </>
   );
 };
